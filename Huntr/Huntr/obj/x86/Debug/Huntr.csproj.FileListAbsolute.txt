@@ -1,0 +1,13 @@
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\obj\x86\Debug\Huntr.csprojResolveAssemblyReference.cache
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.pdb
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Lidgren.Network.dll
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\MonoGame.Framework.dll
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\OpenTK.dll
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\obj\x86\Debug\Huntr.exe
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
+d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
