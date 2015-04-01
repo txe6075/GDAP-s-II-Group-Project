@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Huntr
 {
+    /*Pedro DelaCuadra*/
+
+
     class Player: Lifers
     {
         private int playerNum;
@@ -30,11 +33,11 @@ namespace Huntr
             spriteBatch.Draw(
                 TextureImage, // spritesheet
                 Position, // where to draw in window
-                new Rectangle(0, 0, 64, 64), // pick out a section of spritesheet
+                new Rectangle(0, 465, 60, 110), // pick out a section of spritesheet
                 Color.White, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
-                1f, // scaling factor - dont change image size
+                .6f, // scaling factor - dont change image size
                 SpriteEffects.None, // no effects
                 0  // default layer
             );

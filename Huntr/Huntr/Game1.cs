@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Huntr
 {
+    /* Pedro DelaCuadra */
+
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -19,7 +22,9 @@ namespace Huntr
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D environment1;
-
+        Texture2D playerSprite; // sprite for player object
+        Player p1; // player 1 object
+        Player p2; // player 2 object
         Map map;
 
         public Game1()
@@ -56,6 +61,9 @@ namespace Huntr
             spriteBatch = new SpriteBatch(GraphicsDevice);
             environment1 = Content.Load<Texture2D>("tile1");
             map = new Map(environment1);
+            playerSprite = Content.Load<Texture2D>("sheet");
+            p1 = new Player(new Vector2(0, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 1 object
+            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
             map.LoadMap("map.txt");
             // TODO: use this.Content to load your game content here
         }
@@ -95,6 +103,9 @@ namespace Huntr
             spriteBatch.Begin();
 
             map.Draw(gameTime, spriteBatch);
+
+            p1.Draw(gameTime, spriteBatch); // draw player1
+            p2.Draw(gameTime, spriteBatch); // draw player2
 
             spriteBatch.End();
 

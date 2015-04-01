@@ -11,3 +11,17 @@ d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\obj\x86\Debug
 d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
 d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
 d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.pdb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.exe
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\sheet.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.csprojResolveAssemblyReference.cache
