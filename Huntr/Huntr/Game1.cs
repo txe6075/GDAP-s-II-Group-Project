@@ -62,7 +62,7 @@ namespace Huntr
             environment1 = Content.Load<Texture2D>("tile1");
             map = new Map(environment1);
             playerSprite = Content.Load<Texture2D>("sheet");
-            p1 = new Player(new Vector2(0, 20), new Point(10, 10), playerSprite); // instantiate the player 1 object
+            p1 = new Player(new Vector2(0, 45), new Point(10, 10), playerSprite); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
             map.LoadMap("map.txt");
             // TODO: use this.Content to load your game content here
@@ -88,6 +88,7 @@ namespace Huntr
                 Exit();
 
             // TODO: Add your update logic here
+            p1.Update(gameTime, spriteBatch); // update player 1
 
             base.Update(gameTime);
         }
@@ -105,7 +106,7 @@ namespace Huntr
             map.Draw(gameTime, spriteBatch);
 
             p1.Draw(gameTime, spriteBatch); // draw player 1
-            p1.Update(gameTime, spriteBatch); // update player 1
+            
             p2.Draw(gameTime, spriteBatch); // draw player 2
 
             spriteBatch.End();
