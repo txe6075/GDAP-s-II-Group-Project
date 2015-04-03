@@ -62,7 +62,7 @@ namespace Huntr
             environment1 = Content.Load<Texture2D>("tile1");
             map = new Map(environment1);
             playerSprite = Content.Load<Texture2D>("sheet");
-            p1 = new Player(new Vector2(0, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 1 object
+            p1 = new Player(new Vector2(0, 20), new Point(10, 10), playerSprite); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
             map.LoadMap("map.txt");
             // TODO: use this.Content to load your game content here

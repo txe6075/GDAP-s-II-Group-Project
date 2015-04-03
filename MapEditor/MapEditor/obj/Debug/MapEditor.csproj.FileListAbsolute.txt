@@ -1,0 +1,9 @@
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\bin\Debug\MapEditor.exe.config
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\bin\Debug\MapEditor.exe
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\bin\Debug\MapEditor.pdb
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.csprojResolveAssemblyReference.cache
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.Form1.resources
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+c:\users\zane\documents\visual studio 2013\Projects\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
