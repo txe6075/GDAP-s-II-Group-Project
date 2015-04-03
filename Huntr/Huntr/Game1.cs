@@ -44,9 +44,8 @@ namespace Huntr
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = Variables.screenWidth;
+            graphics.PreferredBackBufferHeight = Variables.screenHeight;
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -62,8 +61,8 @@ namespace Huntr
             environment1 = Content.Load<Texture2D>("tile1");
             map = new Map(environment1);
             playerSprite = Content.Load<Texture2D>("sheet");
-            p1 = new Player(new Vector2(0, 20), new Point(10, 10), playerSprite); // instantiate the player 1 object
-            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
+            p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 1 object
+            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
             map.LoadMap("map.txt");
             // TODO: use this.Content to load your game content here
         }
