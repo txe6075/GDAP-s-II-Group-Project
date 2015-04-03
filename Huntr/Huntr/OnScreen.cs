@@ -10,12 +10,16 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Huntr
 {
+    /*Pedro DelaCuadra*/
+
+
+
     abstract class OnScreen
     {
         private Vector2 position;
         private Point size;
         private Texture2D textureImage;
-        private Rectangle rectangle;
+        private Rectangle rect;
 
         public Vector2 Position
         {
@@ -37,8 +41,8 @@ namespace Huntr
 
         public Rectangle Rect
         {
-            get { return rectangle; }
-            set { rectangle = value; }
+            get { return rect; }
+            set { rect = value; }
         }
 
         public OnScreen(Vector2 pos, Point s, Texture2D ti)
@@ -47,7 +51,7 @@ namespace Huntr
             size = s;
             textureImage = ti;
 
-            rectangle = new Rectangle((int)position.X, (int)position.Y, size.X, size.Y);
+            rect = new Rectangle((int)position.X, (int)position.Y, size.X, size.Y);
         }
     }
 }

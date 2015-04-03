@@ -104,8 +104,9 @@ namespace Huntr
 
             map.Draw(gameTime, spriteBatch);
 
-            p1.Draw(gameTime, spriteBatch); // draw player1
-            p2.Draw(gameTime, spriteBatch); // draw player2
+            p1.Draw(gameTime, spriteBatch); // draw player 1
+            p1.Update(gameTime, spriteBatch); // update player 1
+            p2.Draw(gameTime, spriteBatch); // draw player 2
 
             spriteBatch.End();
 

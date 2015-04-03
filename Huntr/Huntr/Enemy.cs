@@ -10,12 +10,21 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Huntr
 {
+    /*Pedro DelaCuadra*/
+
+
+
     class Enemy: Lifers
     {
         public Enemy(Vector2 pos, Point s, Texture2D ti)
             : base(pos, s, ti)
         {
 
+        }
+
+        public override void Update(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

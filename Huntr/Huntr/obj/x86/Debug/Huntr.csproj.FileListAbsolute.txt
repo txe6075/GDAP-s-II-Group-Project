@@ -25,3 +25,17 @@ D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Hunt
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\sheet.xnb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.csprojResolveAssemblyReference.cache
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.exe
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.csprojResolveAssemblyReference.cache
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\sheet.xnb
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.pdb
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll

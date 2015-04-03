@@ -17,16 +17,25 @@ namespace Huntr
     {
         private int playerNum;
 
+        // get keyboard state
+        KeyboardState kState = Keyboard.GetState();
+
         public Player(Vector2 pos, Point s, Texture2D ti)
             : base(pos, s, ti)
         {
             playerNum = ++Variables.playerNums;
         }
 
-        /*public override void Update()
+        public override void Update(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
-        }*/
+            if (kState.IsKeyDown(Keys.D))
+            {
+                // update the x position
+                Position = new Vector2(Position.X + 10, Position.Y);
+                // redraw the image
+                Draw(gameTime, spriteBatch);
+            }
+        }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -37,7 +46,7 @@ namespace Huntr
                 Color.White, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
-                .6f, // scaling factor - dont change image size
+                .6f, // scaling factor - scale image down to .6
                 SpriteEffects.None, // no effects
                 0  // default layer
             );

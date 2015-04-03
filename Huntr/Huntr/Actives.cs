@@ -10,6 +10,10 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Huntr
 {
+    /*Pedro DelaCuadra*/
+
+
+
     abstract class Actives: OnScreen
     {
         public Actives(Vector2 pos, Point s, Texture2D ti)
@@ -18,8 +22,8 @@ namespace Huntr
 
         }
 
-        //public abstract void UpdateImg();
+        // public abstract void UpdateImg();
 
-        //public abstract void Update();
+        public abstract void Update(GameTime gameTime, SpriteBatch spriteBatch);
     }
 }
