@@ -22,7 +22,7 @@ namespace Huntr
 
         }
 
-        public override void Update(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Update(KeyboardState kState)
         {
             
         }

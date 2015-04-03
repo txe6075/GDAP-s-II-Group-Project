@@ -16,24 +16,38 @@ namespace Huntr
     class Player: Lifers
     {
         private int playerNum;
+        Keys leftKey;
+        Keys rightKey;
 
         // get keyboard state
-        KeyboardState kState = Keyboard.GetState();
 
-        public Player(Vector2 pos, Point s, Texture2D ti)
+        public Player(Vector2 pos, Point s, Texture2D ti, int num)
             : base(pos, s, ti)
         {
-            playerNum = ++Variables.playerNums;
+            playerNum = num;
+            if (playerNum == 1)
+            {
+                rightKey = Keys.D;
+                leftKey = Keys.A;
+            }
+            else
+            {
+                rightKey = Keys.L;
+                leftKey = Keys.J;
+            }
         }
 
-        public override void Update(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Update(KeyboardState kState)
         {
-            if (kState.IsKeyDown(Keys.D))
+            if (kState.IsKeyDown(rightKey))
             {
                 // update the x position
-                Position = new Vector2(Position.X + 10, Position.Y);
-                // redraw the image
-                Draw(gameTime, spriteBatch);
+                Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
+            }
+            if (kState.IsKeyDown(leftKey))
+            {
+                // update the x position
+                Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
             }
         }
         

@@ -24,6 +24,6 @@ namespace Huntr
 
         // public abstract void UpdateImg();
 
-        public abstract void Update(GameTime gameTime, SpriteBatch spriteBatch);
+        public abstract void Update(KeyboardState kState);
     }
 }

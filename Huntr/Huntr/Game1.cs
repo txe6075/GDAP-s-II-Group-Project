@@ -19,6 +19,9 @@ namespace Huntr
     /// </summary>
     public class Game1 : Game
     {
+
+        KeyboardState kState = new KeyboardState();
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D environment1;
@@ -61,13 +64,12 @@ namespace Huntr
             environment1 = Content.Load<Texture2D>("tile1");
             map = new Map(environment1);
             playerSprite = Content.Load<Texture2D>("sheet");
-<<<<<<< HEAD
-            p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 1 object
-            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
-=======
-            p1 = new Player(new Vector2(0, 45), new Point(10, 10), playerSprite); // instantiate the player 1 object
-            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
->>>>>>> origin/master2
+            p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 1); // instantiate the player 1 object
+            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 2); // instantiate the player 2 object
+
+            //p1 = new Player(new Vector2(0, 45), new Point(10, 10), playerSprite); // instantiate the player 1 object
+            //p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
+
             map.LoadMap("map.txt");
             // TODO: use this.Content to load your game content here
         }
@@ -91,8 +93,10 @@ namespace Huntr
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            kState = Keyboard.GetState();
             // TODO: Add your update logic here
-            p1.Update(gameTime, spriteBatch); // update player 1
+            p1.Update(kState); // update player 1
+            p2.Update(kState);
 
             base.Update(gameTime);
         }
@@ -103,6 +107,8 @@ namespace Huntr
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            Update(gameTime);
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
