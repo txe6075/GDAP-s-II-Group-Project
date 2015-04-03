@@ -36,7 +36,7 @@ namespace Huntr
                 Draw(gameTime, spriteBatch);
             }
         }
-
+        
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
@@ -46,7 +46,7 @@ namespace Huntr
                 Color.White, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
-                .6f, // scaling factor - scale image down to .6
+                .4f, // scaling factor - scale image down to .4
                 SpriteEffects.None, // no effects
                 0  // default layer
             );
