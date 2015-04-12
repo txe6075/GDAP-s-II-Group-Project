@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * The instantiation for both players
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +30,7 @@ namespace Huntr
         public Player(Vector2 pos, Point s, Texture2D ti, int num)
             : base(pos, s, ti)
         {
-            playerNum = num;
+            playerNum = num;    //sets the keys
             if (playerNum == 1)
             {
                 rightKey = Keys.D;

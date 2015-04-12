@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * Items that are pick up able
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * All moving objects on screen
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +28,7 @@ namespace Huntr
 
         }
 
-        // public abstract void UpdateImg();
+        //public abstract void UpdateImg();
 
         public abstract void Update(KeyboardState kState);
     }

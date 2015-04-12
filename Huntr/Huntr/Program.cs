@@ -1,4 +1,10 @@
-﻿#region Using Statements
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * Starts the game
+ */
+
+#region Using Statements
 using System;
 using System.Collections.Generic;
 using System.Linq;

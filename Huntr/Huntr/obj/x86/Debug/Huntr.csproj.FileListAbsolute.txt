@@ -42,8 +42,6 @@ C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debu
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.exe
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
-C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
-C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\sheet.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
@@ -68,3 +66,4 @@ C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\Wind
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\OpenTK.dll
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
+C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb

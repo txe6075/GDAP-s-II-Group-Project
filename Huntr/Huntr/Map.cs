@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * All environment objects in one class
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
@@ -16,11 +22,13 @@ namespace Huntr
         List<Environment> environments;
 
         Texture2D environment1;
+        Texture2D environment2;
 
-        public Map( Texture2D ev1)
+        public Map( Texture2D ev1, Texture2D ev2)
         {
             environments = new List<Environment>();
             environment1 = ev1;
+            environment2 = ev2;
         }
 
         public void LoadMap(string fileName){
@@ -38,7 +46,11 @@ namespace Huntr
                     {
                         if (int.Parse(word) == 1)
                         {
-                            environments.Add(new Environment(new Vector2(j * Variables.screenWidth / 30, i * Variables.screenHeight / 17), new Point(Variables.screenWidth/30, Variables.screenHeight/17), environment1));
+                            environments.Add(new Environment(new Vector2(j * Variables.screenWidth / 30, i * Variables.screenHeight / 17), new Point(Variables.screenWidth / 30, Variables.screenHeight / 17), environment1));
+                        }
+                        else if (int.Parse(word) == 2)
+                        {
+                            environments.Add(new Environment(new Vector2(j * Variables.screenWidth / 30, i * Variables.screenHeight / 17), new Point(Variables.screenWidth / 30, Variables.screenHeight / 17), environment2));
                         }
                         j++;
                     }

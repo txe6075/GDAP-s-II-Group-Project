@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * Thrown objects that damage players or enemies
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +30,7 @@ namespace Huntr
 
         public override void Update(KeyboardState kState)
         {
-            
+            //whenever we implement shots
         }
         
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

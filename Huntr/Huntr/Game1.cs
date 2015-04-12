@@ -1,4 +1,10 @@
-﻿#region Using Statements
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * Main class
+ */
+
+#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -25,6 +31,7 @@ namespace Huntr
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D environment1;
+        Texture2D environment2;
         Texture2D playerSprite; // sprite for player object
         Player p1; // player 1 object
         Player p2; // player 2 object
@@ -54,9 +61,9 @@ namespace Huntr
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = Variables.screenWidth;
+            graphics.PreferredBackBufferWidth = Variables.screenWidth;      //setting the screen size
             graphics.PreferredBackBufferHeight = Variables.screenHeight;
-            graphics.ApplyChanges();
+            graphics.ApplyChanges(); 
             base.Initialize();
         }
 
@@ -68,14 +75,13 @@ namespace Huntr
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            environment1 = Content.Load<Texture2D>("tile1");
-            map = new Map(environment1);
-            playerSprite = Content.Load<Texture2D>("sheet");
+            environment1 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
+            environment2 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
+            map = new Map(environment1, environment2);
+            playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
             p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 1); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 2); // instantiate the player 2 object
 
-            //p1 = new Player(new Vector2(0, 45), new Point(10, 10), playerSprite); // instantiate the player 1 object
-            //p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 550, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite); // instantiate the player 2 object
 
             //Menu object
             menuSprite = Content.Load<Texture2D>("Menu");
@@ -104,10 +110,10 @@ namespace Huntr
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            kState = Keyboard.GetState();
-            // TODO: Add your update logic here
-            p1.Update(kState); // update player 1
-            p2.Update(kState);
+            kState = Keyboard.GetState(); //registers button pushes
+
+            p1.Update(kState); // update players
+            p2.Update(kState); 
 
             base.Update(gameTime);
         }

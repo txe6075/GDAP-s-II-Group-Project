@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * Base class for living objects
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Team: Elimmination Platform
+ * 
+ * All things to be printed to the screen
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
