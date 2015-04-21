@@ -18,11 +18,9 @@ namespace Huntr
 {
     static class Variables
     {
-        public static Texture2D environment1;
-        public static Texture2D environment2;
         public static int playerNums;
         public static int screenWidth = 1200;
         public static int screenHeight = 800;
-        public static int playerSpeed = 5;
+        public static int playerSpeed = 2;
     }
 }

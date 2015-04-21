@@ -79,8 +79,8 @@ namespace Huntr
             environment2 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
             map = new Map(environment1, environment2);
             playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
-            p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 1); // instantiate the player 1 object
-            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 186), new Point(10, 10), playerSprite, 2); // instantiate the player 2 object
+            p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, 1); // instantiate the player 1 object
+            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, 2); // instantiate the player 2 object
 
 
             //Menu object
@@ -125,6 +125,8 @@ namespace Huntr
         protected override void Draw(GameTime gameTime)
         {
             Update(gameTime);
+
+            Collision();
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -202,6 +204,70 @@ namespace Huntr
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void Collision()
+        {
+            p1.Falsify();
+            p2.Falsify();
+            foreach (Environment n in map.Environments)
+            {
+                if (p1.Rect.Intersects(n.Rect))
+                {
+                    if (p1.Rect.Bottom < n.Rect.Top + 20)
+                    {
+                        p1.bottom = true; 
+                        p1.top = false;
+                        p1.Position = new Vector2(p1.Position.X, n.Position.Y - p1.Size.Y + 10);
+                    }
+                    else if (p1.Rect.Top > n.Rect.Bottom - 20)
+                    {
+                        p1.top = true;
+                        p1.gravEffect = 0;
+                    }
+                    else if (p1.Rect.Left > n.Rect.Right - 20)
+                    {
+                        p1.left = true;
+                        p1.right = false;
+                        p1.Position = new Vector2(n.Position.X + n.Size.X - 1, p1.Position.Y);
+                    }
+                    else if (p1.Rect.Right < n.Rect.Left + 20)
+                    {
+                        p1.right = true;
+                        p1.left = false;
+                        p1.Position = new Vector2(n.Position.X - p1.Size.X + 1, p1.Position.Y);
+                    }
+                }
+
+                if (p2.Rect.Intersects(n.Rect))
+                {
+
+                    if (p2.Rect.Bottom < n.Rect.Top + 20)
+                    {
+                        p2.bottom = true;
+                        p2.top = false;
+                        p2.Position = new Vector2(p2.Position.X, n.Position.Y - p2.Size.Y + 10);
+                    }
+                    else if (p2.Rect.Top > n.Rect.Bottom - 20)
+                    {
+                        p2.top = true;
+                        p2.gravEffect = 0;
+                    }
+                    else if (p2.Rect.Left > n.Rect.Right - 20)
+                    {
+                        p2.left = true;
+                        p2.right = false;
+                        p2.Position = new Vector2(n.Position.X + n.Size.X, p2.Position.Y);
+                    }
+                    else if (p1.Rect.Right < n.Rect.Left + 20)
+                    {
+                        p2.right = true;
+                        p2.left = false;
+                        p2.Position = new Vector2(n.Position.X - p2.Size.X, p2.Position.Y);
+                    }
+
+                }
+            }
         }
     }
 }

@@ -19,7 +19,12 @@ namespace Huntr
 {
     class Map
     {
-        List<Environment> environments;
+        private List<Environment> environments;
+
+        public List<Environment> Environments
+        {
+            get { return environments; }
+        }
 
         Texture2D environment1;
         Texture2D environment2;
@@ -76,11 +81,11 @@ namespace Huntr
                 spriteBatch.Draw(
                     tile.TextureImage, // spritesheet
                     tile.Position, // where to draw in window
-                    new Rectangle(0, 0, Variables.screenWidth / 30, Variables.screenHeight / 17), // pick out a section of spritesheet
+                    new Rectangle(0, 0, 64, 64), // pick out a section of spritesheet
                     Color.White, // dont change image color
                     0, // don't rotate the image
                     Vector2.Zero, // rotation center (not used)
-                    1f, // scaling factor - dont change image size
+                    .625f, // scaling factor - dont change image size
                     SpriteEffects.None, // no effects
                     0  // default layer
                 );

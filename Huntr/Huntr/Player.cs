@@ -24,6 +24,15 @@ namespace Huntr
         private int playerNum;
         Keys leftKey;
         Keys rightKey;
+        Keys upKey;
+        Keys downKey;
+        public bool left;
+        public bool right;
+        public bool bottom;
+        public bool top;
+        public bool jumpPress;
+        public int gravEffect;
+        private int gravCounter;
 
         // get keyboard state
 
@@ -35,26 +44,54 @@ namespace Huntr
             {
                 rightKey = Keys.D;
                 leftKey = Keys.A;
+                upKey = Keys.W;
+                downKey = Keys.S;
             }
             else
             {
                 rightKey = Keys.L;
                 leftKey = Keys.J;
+                upKey = Keys.I;
+                downKey = Keys.K;
             }
+            right = false;
+            left = false;
+            bottom = false;
+            top = false;
+            jumpPress = false;
+            gravEffect = 0;
+            gravCounter = 0;
         }
 
         public override void Update(KeyboardState kState)
         {
-            if (kState.IsKeyDown(rightKey))
+            Gravity();
+
+            if (kState.IsKeyDown(rightKey) && right == false)
             {
-                // update the x position
+                left = false;
+
                 Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
             }
-            if (kState.IsKeyDown(leftKey))
+            if (kState.IsKeyDown(leftKey) && left == false)
             {
-                // update the x position
+                right = false;
+
                 Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
             }
+            if (kState.IsKeyDown(upKey) && top == false && jumpPress == false)
+            {
+                top = true;
+                bottom = false;
+                jumpPress = true;
+
+                Position = new Vector2(Position.X, Position.Y - 10);
+
+                gravEffect = 4;
+            }
+            else if (!kState.IsKeyDown(upKey)) jumpPress = false;
+
+            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
         }
         
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -62,14 +99,44 @@ namespace Huntr
             spriteBatch.Draw(
                 TextureImage, // spritesheet
                 Position, // where to draw in window
-                new Rectangle(0, 465, 60, 110), // pick out a section of spritesheet
+                new Rectangle(0, 463, 60, 128), // pick out a section of spritesheet
                 Color.White, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
-                .4f, // scaling factor - scale image down to .4
+                .5f, // scaling factor - scale image down to .4
                 SpriteEffects.None, // no effects
                 0  // default layer
             );
+        }
+
+        public void Gravity()
+        {
+            if (bottom == false)
+            {
+                Position = new Vector2(Position.X, Position.Y - gravEffect);
+
+                gravCounter++;
+                if (gravCounter % 15 == 0)
+                {
+                    if(gravEffect > -10)
+                        gravEffect -= 1;
+                    gravCounter = 0;
+
+                }
+            }
+            else
+            {
+                gravCounter = 0;
+                gravEffect = 0;
+            }
+
+        }
+
+        public void Falsify()
+        {
+            bottom = false;
+            left = false;
+            right = false;
         }
     }
 }
