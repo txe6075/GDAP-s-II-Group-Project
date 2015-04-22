@@ -85,7 +85,7 @@ namespace Huntr
                     Color.White, // dont change image color
                     0, // don't rotate the image
                     Vector2.Zero, // rotation center (not used)
-                    .625f, // scaling factor - dont change image size
+                    .75f, // scaling factor - dont change image size
                     SpriteEffects.None, // no effects
                     0  // default layer
                 );

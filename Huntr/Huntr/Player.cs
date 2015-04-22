@@ -87,7 +87,7 @@ namespace Huntr
 
                 Position = new Vector2(Position.X, Position.Y - 10);
 
-                gravEffect = 4;
+                gravEffect = 5;
             }
             else if (!kState.IsKeyDown(upKey)) jumpPress = false;
 
@@ -116,7 +116,7 @@ namespace Huntr
                 Position = new Vector2(Position.X, Position.Y - gravEffect);
 
                 gravCounter++;
-                if (gravCounter % 15 == 0)
+                if (gravCounter % 10 == 0)
                 {
                     if(gravEffect > -10)
                         gravEffect -= 1;

@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+
 #endregion
 
 namespace Huntr
@@ -60,6 +61,7 @@ namespace Huntr
         /// </summary>
         protected override void Initialize()
         {
+            Window.SetPosition(new Point(0, 0));
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = Variables.screenWidth;      //setting the screen size
             graphics.PreferredBackBufferHeight = Variables.screenHeight;
@@ -87,7 +89,7 @@ namespace Huntr
             menuSprite = Content.Load<Texture2D>("Menu");
             menu = new Menu(menuSprite, new Vector2(0, 0));
 
-            map.LoadMap("map.txt");
+            map.LoadMap("testMap.txt");
             // TODO: use this.Content to load your game content here
         }
 

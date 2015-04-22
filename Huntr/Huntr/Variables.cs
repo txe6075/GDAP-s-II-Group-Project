@@ -19,8 +19,8 @@ namespace Huntr
     static class Variables
     {
         public static int playerNums;
-        public static int screenWidth = 1200;
-        public static int screenHeight = 800;
+        public static int screenWidth = 1440;
+        public static int screenHeight = 816;
         public static int playerSpeed = 2;
     }
 }
