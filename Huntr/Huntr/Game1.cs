@@ -216,56 +216,56 @@ namespace Huntr
             {
                 if (p1.Rect.Intersects(n.Rect))
                 {
-                    if (p1.Rect.Bottom < n.Rect.Top + 20)
+                    if (p1.Rect.Top > n.Rect.Bottom - 20)
+                    {
+                        p1.top = true;
+                        p1.gravEffect = -1;
+                    }
+                    else if (p1.Rect.Bottom < n.Rect.Top + 20)
                     {
                         p1.bottom = true; 
                         p1.top = false;
                         p1.Position = new Vector2(p1.Position.X, n.Position.Y - p1.Size.Y + 10);
                     }
-                    else if (p1.Rect.Top > n.Rect.Bottom - 20)
-                    {
-                        p1.top = true;
-                        p1.gravEffect = 0;
-                    }
                     else if (p1.Rect.Left > n.Rect.Right - 20)
                     {
                         p1.left = true;
                         p1.right = false;
-                        p1.Position = new Vector2(n.Position.X + n.Size.X - 1, p1.Position.Y);
+                        p1.Position = new Vector2(n.Position.X + n.Size.X + 1, p1.Position.Y);
                     }
                     else if (p1.Rect.Right < n.Rect.Left + 20)
                     {
                         p1.right = true;
                         p1.left = false;
-                        p1.Position = new Vector2(n.Position.X - p1.Size.X + 1, p1.Position.Y);
+                        p1.Position = new Vector2(n.Position.X - p1.Size.X - 1, p1.Position.Y);
                     }
                 }
 
                 if (p2.Rect.Intersects(n.Rect))
                 {
 
-                    if (p2.Rect.Bottom < n.Rect.Top + 20)
+                    if (p2.Rect.Top > n.Rect.Bottom - 20)
+                    {
+                        p2.top = true;
+                        p2.gravEffect = -1;
+                    }
+                    else if (p2.Rect.Bottom < n.Rect.Top + 20)
                     {
                         p2.bottom = true;
                         p2.top = false;
                         p2.Position = new Vector2(p2.Position.X, n.Position.Y - p2.Size.Y + 10);
                     }
-                    else if (p2.Rect.Top > n.Rect.Bottom - 20)
-                    {
-                        p2.top = true;
-                        p2.gravEffect = 0;
-                    }
                     else if (p2.Rect.Left > n.Rect.Right - 20)
                     {
                         p2.left = true;
                         p2.right = false;
-                        p2.Position = new Vector2(n.Position.X + n.Size.X, p2.Position.Y);
+                        p2.Position = new Vector2(n.Position.X + n.Size.X + 1, p2.Position.Y);
                     }
-                    else if (p1.Rect.Right < n.Rect.Left + 20)
+                    else if (p2.Rect.Right < n.Rect.Left + 20)
                     {
                         p2.right = true;
                         p2.left = false;
-                        p2.Position = new Vector2(n.Position.X - p2.Size.X, p2.Position.Y);
+                        p2.Position = new Vector2(n.Position.X - p2.Size.X - 1, p2.Position.Y);
                     }
 
                 }

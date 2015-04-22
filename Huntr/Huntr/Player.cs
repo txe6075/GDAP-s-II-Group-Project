@@ -67,6 +67,8 @@ namespace Huntr
         {
             Gravity();
 
+            if (Position.Y <= 36) Position = new Vector2(Position.X, 37);
+
             if (kState.IsKeyDown(rightKey) && right == false)
             {
                 left = false;
@@ -126,6 +128,7 @@ namespace Huntr
             }
             else
             {
+
                 gravCounter = 0;
                 gravEffect = 0;
             }
