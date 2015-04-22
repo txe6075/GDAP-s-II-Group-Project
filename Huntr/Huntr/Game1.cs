@@ -115,7 +115,11 @@ namespace Huntr
             kState = Keyboard.GetState(); //registers button pushes
 
             p1.Update(kState); // update players
-            p2.Update(kState); 
+            p2.Update(kState);
+
+            // update character images
+            p1.UpdateImg(gameTime, kState);
+            p2.UpdateImg(gameTime, kState);
 
             base.Update(gameTime);
         }

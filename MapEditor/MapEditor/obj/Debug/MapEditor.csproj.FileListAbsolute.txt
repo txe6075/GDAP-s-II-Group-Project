@@ -16,3 +16,12 @@ C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\
 C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.Form1.resources
 C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
 C:\Users\Gideon\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\bin\Debug\MapEditor.exe.config
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\bin\Debug\MapEditor.exe
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\bin\Debug\MapEditor.pdb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.csprojResolveAssemblyReference.cache
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.Form1.resources
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache

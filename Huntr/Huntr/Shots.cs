@@ -32,6 +32,11 @@ namespace Huntr
         {
             //whenever we implement shots
         }
+
+        public override void UpdateImg(GameTime gameTime, KeyboardState kState)
+        {
+            throw new NotImplementedException();
+        }
         
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

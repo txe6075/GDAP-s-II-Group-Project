@@ -12,8 +12,6 @@ d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL
 d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
 d:\users\ztd9457\documents\visual studio 2013\Projects\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
-D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\map.txt
-D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.pdb
@@ -67,3 +65,4 @@ C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\Wind
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb

@@ -22,6 +22,7 @@ namespace Huntr
     class Player: Lifers
     {
         private int playerNum;
+        SpriteEffects effect = SpriteEffects.None;
         Keys leftKey;
         Keys rightKey;
         Keys upKey;
@@ -34,7 +35,31 @@ namespace Huntr
         public int gravEffect;
         private int gravCounter;
 
-        // get keyboard state
+        // attributes for updating the image
+        Rectangle charRect = new Rectangle(0, 463, 60, 128); // character is facing forward initially
+        // standing frame y position
+        const int STANDING_Y = 463;
+        // running frame y position
+        const int RUNNING_Y = 230;
+        // jumping frame y position
+        const int JUMPING_Y = 105;
+        // running frame sizes
+        const int RUN_WIDTH = 92;
+        const int RUN_HEIGHT = 116;
+        // jumping frame sizes
+        const int JUMP_WIDTH = 90;
+        const int JUMP_HEIGHT = 119;
+        // standing frame sizes
+        const int STAND_WIDTH = 60;
+        const int STAND_HEIGHT = 128;
+        int frame;
+        int framesElapsed;
+        int numFrames = 10;
+        double timePerFrame = 100;
+
+        // enumeration
+        enum CharState { runLeft, runRight, faceForward, jump }
+        CharState charState = CharState.faceForward;
 
         public Player(Vector2 pos, Point s, Texture2D ti, int num)
             : base(pos, s, ti)
@@ -61,6 +86,90 @@ namespace Huntr
             jumpPress = false;
             gravEffect = 0;
             gravCounter = 0;
+        }
+
+        // updates the player image depending on key presses
+        public override void UpdateImg(GameTime gameTime, KeyboardState kState)
+        {
+            // Calculate the frame to draw based on the time
+            framesElapsed = (int)(gameTime.TotalGameTime.TotalMilliseconds / timePerFrame);
+            frame = framesElapsed % numFrames;
+
+            // character is running right
+            if (kState.IsKeyDown(rightKey))
+            {
+                charState = CharState.runRight;
+            }
+            // character is running left
+            if (kState.IsKeyDown(leftKey))
+            {
+                charState = CharState.runLeft;
+            }
+            // character is jumping
+            if (kState.IsKeyDown(upKey))
+            {
+                charState = CharState.jump;
+            }
+
+            if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
+            {
+                charState = CharState.faceForward;
+            }
+
+            // finite state machine code
+            switch (charState)
+            {
+                case CharState.jump:
+                    charState = CharState.jump;
+                    break;
+                case CharState.runLeft:
+                    charState = CharState.runLeft;
+                    break;
+                case CharState.runRight:
+                    charState = CharState.runRight;
+                    break;
+                default:
+                    charState = CharState.faceForward;
+                    break;
+            }
+
+            if (charState == CharState.runLeft)
+            {
+                charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                effect = SpriteEffects.FlipHorizontally;
+            }
+
+            if (charState == CharState.runRight)
+            {
+                charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                effect = SpriteEffects.None;
+            }
+
+            if (charState == CharState.jump && kState.IsKeyDown(leftKey))
+            {
+                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                effect = SpriteEffects.FlipHorizontally;
+            }
+            else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
+            {
+                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                effect = SpriteEffects.None;
+            }
+            else if (charState == CharState.jump)
+            {
+                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+            }
+
+            if (charState == CharState.faceForward)
+            {
+                charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
+            }
+
+            // make sure jumping animation doesnt happen while on the ground
+            if (charState != CharState.runLeft && charState != CharState.runRight && bottom == true)
+            {
+                charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
+            }
         }
 
         public override void Update(KeyboardState kState)
@@ -101,12 +210,12 @@ namespace Huntr
             spriteBatch.Draw(
                 TextureImage, // spritesheet
                 Position, // where to draw in window
-                new Rectangle(0, 463, 60, 128), // pick out a section of spritesheet
+                charRect, // pick out a section of spritesheet
                 Color.White, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
                 .5f, // scaling factor - scale image down to .4
-                SpriteEffects.None, // no effects
+                effect, // no effects
                 0  // default layer
             );
         }
