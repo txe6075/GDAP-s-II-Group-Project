@@ -74,3 +74,28 @@ C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile2.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\redheart.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Font1.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Spinsphere.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\sheet.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Kunai.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\redChar.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile1.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile2.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile3.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\tile4.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\redheart.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Font1.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.exe
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Huntr.pdb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.csprojResolveAssemblyReference.cache
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.exe
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Huntr.pdb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu2.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Achievement Button.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Exit Game Button.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Multiplayer Button.xnb

@@ -52,9 +52,12 @@ namespace Huntr
         //Menu related attributes
         Menu menu;
         Texture2D menuSprite;
-        public enum gameState { MainMenu, SinglePlayer, Multiplayer, Achievements };
+        Texture2D button1Sprite;
+        Texture2D button2Sprite;
+        Texture2D button3Sprite;
+        public enum gameState { MainMenu, Exit, Multiplayer, Achievements };
         gameState state;
-        int option = 2;
+        int option = 0;
 
 
         public Game1()
@@ -112,8 +115,11 @@ namespace Huntr
 
 
             //Menu object
-            menuSprite = Content.Load<Texture2D>("Menu");
-            menu = new Menu(menuSprite, new Vector2(0, 0));
+            menuSprite = Content.Load<Texture2D>("Menu2");
+            button1Sprite = Content.Load<Texture2D>("Multiplayer Button");
+            button2Sprite = Content.Load<Texture2D>("Achievement Button");
+            button3Sprite = Content.Load<Texture2D>("Exit Game Button");
+            menu = new Menu(menuSprite, new Vector2(0, 0), button1Sprite, new Vector2(600,400), button2Sprite, new Vector2(600, 500), button3Sprite, new Vector2(600, 600));
 
         }
 
@@ -170,51 +176,24 @@ namespace Huntr
 
                     //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
                     menu.Draw(gameTime, spriteBatch);
-                    menu.DrawButton(gameTime, spriteBatch, option);
-                    if (Keyboard.GetState().IsKeyDown(Keys.W)) //pressed up, move the cursor up (decrease option)
-                    {
-                        GraphicsDevice.Clear(Color.Gainsboro);
-                        //if value is 0, don't decrease it
-                        if (option == 0)
-                        {
-                            option = 0;
-                        }
-                        else
-                        {
-                            option--; //decreases option by 1
-                        }
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.S))
-                    {
-                        //if option is 2, don't increase it
-                        if (option == 2)
-                        {
-                            option = 2;
-                        }
-                        else
-                        {
-                            option++; //increases option by 1
-                        }
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter)) //detect when the enter key is pressed
+                    //menu.DrawButtons(gameTime, spriteBatch, option);
+                    option = menu.Navigate(gameTime, spriteBatch, option);
+                    if (menu.CheckPress == true)
                     {
                         switch (option)
                         {
-                            case 0: //this.state = gameState.SinglePlayer; //set the gameState to singleplayer
-                                GraphicsDevice.Clear(Color.Gold);//debug to make sure it's going to the right place
+                            case 0: state = gameState.Multiplayer;
                                 break;
-                            case 1: this.state = gameState.Achievements; //set the gameState to achievement
-                                GraphicsDevice.Clear(Color.Red);
+                            case 1: state = gameState.Achievements;
                                 break;
-                            case 2: this.state = gameState.Multiplayer; //set the gameState to multiplayer
-                                GraphicsDevice.Clear(Color.Green);
+                            case 2: state = gameState.Exit;
                                 break;
                         }
                     }
-                    menu.Draw(gameTime, spriteBatch); //draw the menu
                     break;
 
-                case gameState.SinglePlayer:
+                case gameState.Exit:
+                    Exit();
                     break;
                 case gameState.Multiplayer:
                     map.Draw(gameTime, spriteBatch); //draw map
