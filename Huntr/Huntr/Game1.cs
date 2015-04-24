@@ -59,6 +59,10 @@ namespace Huntr
         gameState state;
         int option = 0;
 
+        //Achievement Screen attributes
+        Texture2D achieveScreenSprite;
+        Achievements achieve;
+
 
         public Game1()
             : base()
@@ -121,6 +125,9 @@ namespace Huntr
             button3Sprite = Content.Load<Texture2D>("Exit Game Button");
             menu = new Menu(menuSprite, new Vector2(0, 0), button1Sprite, new Vector2(600,400), button2Sprite, new Vector2(600, 500), button3Sprite, new Vector2(600, 600));
 
+            //Achievement Stuff
+            achieveScreenSprite = Content.Load<Texture2D>("Achievement Screen");
+            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0));
         }
 
         /// <summary>
@@ -206,6 +213,7 @@ namespace Huntr
 
                     break;
                 case gameState.Achievements:
+                    achieve.Draw(gameTime, spriteBatch);
                     break;
 
             }

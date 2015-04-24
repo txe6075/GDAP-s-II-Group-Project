@@ -99,3 +99,4 @@ C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Deb
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Achievement Button.xnb
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Exit Game Button.xnb
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Multiplayer Button.xnb
+C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Achievement Screen.xnb
