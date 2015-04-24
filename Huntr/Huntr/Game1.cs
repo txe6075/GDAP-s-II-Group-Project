@@ -36,6 +36,7 @@ namespace Huntr
         Texture2D environment3;
         Texture2D environment4;
         Texture2D playerSprite; // sprite for player object
+        Texture2D player2Sprite; // sprite for player object
         Texture2D kunai;
         Player p1; // player 1 object
         Player p2; // player 2 object
@@ -87,8 +88,9 @@ namespace Huntr
             kunai = Content.Load<Texture2D>("Kunai"); //loading in the different tiles
             map = new Map(environment1, environment2, environment3, environment4);
             playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
+            player2Sprite = Content.Load<Texture2D>("redChar"); //loads the character sheets
             p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 1); // instantiate the player 1 object
-            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 2); // instantiate the player 2 object
+            p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), player2Sprite, kunai, 2); // instantiate the player 2 object
 
 
             //Menu object

@@ -33,6 +33,18 @@ namespace MapEditor
                     panel1.Controls.Add(cpb[i, j]);
                 }
             }
+
+            for (int i = 0; i < sizeX; i++)
+            {
+                cpb[i, 0].Image = Image.FromFile("Tile4.png");
+                cpb[i, sizeY - 1].Image = Image.FromFile("Tile2.png");
+            }
+
+            for (int i = 0; i < sizeY; i++)
+            {
+                cpb[0, i].Image = Image.FromFile("Tile1.png");
+                cpb[sizeX - 1, i].Image = Image.FromFile("Tile1.png");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -101,6 +101,9 @@
     <Content Include="Content\tile1.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\redChar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\tile2.xnb" />
     <Content Include="Content\tile3.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
