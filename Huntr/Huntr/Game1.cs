@@ -33,6 +33,8 @@ namespace Huntr
         SpriteBatch spriteBatch;
         Texture2D environment1;
         Texture2D environment2;
+        Texture2D environment3;
+        Texture2D environment4;
         Texture2D playerSprite; // sprite for player object
         Texture2D kunai;
         Player p1; // player 1 object
@@ -78,10 +80,12 @@ namespace Huntr
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            environment1 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
+            environment1 = Content.Load<Texture2D>("tile1"); //loading in the different tiles
             environment2 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
+            environment3 = Content.Load<Texture2D>("tile3"); //loading in the different tiles
+            environment4 = Content.Load<Texture2D>("tile4"); //loading in the different tiles
             kunai = Content.Load<Texture2D>("Kunai"); //loading in the different tiles
-            map = new Map(environment1, environment2);
+            map = new Map(environment1, environment2, environment3, environment4);
             playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
             p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 1); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 2); // instantiate the player 2 object

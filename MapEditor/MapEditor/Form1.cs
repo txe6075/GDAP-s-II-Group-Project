@@ -120,6 +120,14 @@ namespace MapEditor
                     Image = Image.FromFile("Tile2.png");
                     break;
                 case 2:
+                    tileNum = 3;
+                    Image = Image.FromFile("Tile3.png");
+                    break;
+                case 3:
+                    tileNum = 4;
+                    Image = Image.FromFile("Tile4.png");
+                    break;
+                case 4:
                     tileNum = 0;
                     Image = Image.FromFile("Tile.png");
                     break;
