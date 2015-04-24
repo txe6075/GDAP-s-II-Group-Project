@@ -95,6 +95,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Kunai.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\tile2.xnb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

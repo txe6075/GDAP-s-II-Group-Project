@@ -16,21 +16,43 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Huntr
 {
-    /*Pedro DelaCuadra*/
-
-
 
     class Shots: Actives
     {
+        public int direction;
+        public int angle;
+        public bool alive;
+
         public Shots(Vector2 pos, Point s, Texture2D ti)
             : base(pos, s, ti)
         {
-
+            direction = 0;
+            angle = 0;
+            alive = false;
         }
 
         public override void Update(KeyboardState kState)
         {
-            //whenever we implement shots
+            if (direction == 1)
+            {
+                Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
+                angle -= 2;
+            }
+            else if (direction == 2)
+            {
+                Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
+                angle += 2;
+            }
+
+            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
+        }
+
+        public void Set(Vector2 pos, int dir)
+        {
+            this.Position = new Vector2(pos.X, pos.Y);
+            direction = dir;
+            angle = 0;
+            alive = true;
         }
 
         public override void UpdateImg(GameTime gameTime, KeyboardState kState)
@@ -45,7 +67,7 @@ namespace Huntr
                 Position, // where to draw in window
                 new Rectangle(0, 0, 0, 0), // pick out a section of spritesheet
                 Color.White, // dont change image color
-                0, // don't rotate the image
+                angle, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
                 1f, // scaling factor - dont change image size
                 SpriteEffects.None, // no effects

@@ -27,6 +27,7 @@ namespace Huntr
         Keys rightKey;
         Keys upKey;
         Keys downKey;
+        Keys fireKey;
         public bool left;
         public bool right;
         public bool bottom;
@@ -34,6 +35,10 @@ namespace Huntr
         public bool jumpPress;
         public int gravEffect;
         private int gravCounter;
+
+        private int direction;
+
+        Shots[] shots = new Shots[5];
 
         // attributes for updating the image
         Rectangle charRect = new Rectangle(0, 463, 60, 128); // character is facing forward initially
@@ -61,7 +66,7 @@ namespace Huntr
         enum CharState { runLeft, runRight, faceForward, jump }
         CharState charState = CharState.faceForward;
 
-        public Player(Vector2 pos, Point s, Texture2D ti, int num)
+        public Player(Vector2 pos, Point s, Texture2D ti, Texture2D kunai, int num)
             : base(pos, s, ti)
         {
             playerNum = num;    //sets the keys
@@ -71,6 +76,8 @@ namespace Huntr
                 leftKey = Keys.A;
                 upKey = Keys.W;
                 downKey = Keys.S;
+                fireKey = Keys.F;
+                direction = 2;
             }
             else
             {
@@ -78,6 +85,8 @@ namespace Huntr
                 leftKey = Keys.J;
                 upKey = Keys.I;
                 downKey = Keys.K;
+                fireKey = Keys.H;
+                direction = 1;
             }
             right = false;
             left = false;
@@ -86,6 +95,11 @@ namespace Huntr
             jumpPress = false;
             gravEffect = 0;
             gravCounter = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                shots[i] = new Shots(Position, Size, kunai);
+            }
         }
 
         // updates the player image depending on key presses
@@ -136,23 +150,27 @@ namespace Huntr
             if (charState == CharState.runLeft)
             {
                 charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                direction = 1;
                 effect = SpriteEffects.FlipHorizontally;
             }
 
             if (charState == CharState.runRight)
             {
                 charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                direction = 2;
                 effect = SpriteEffects.None;
             }
 
             if (charState == CharState.jump && kState.IsKeyDown(leftKey))
             {
                 charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                direction = 1;
                 effect = SpriteEffects.FlipHorizontally;
             }
             else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
             {
                 charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                direction = 2;
                 effect = SpriteEffects.None;
             }
             else if (charState == CharState.jump)
@@ -202,6 +220,15 @@ namespace Huntr
             }
             else if (!kState.IsKeyDown(upKey)) jumpPress = false;
 
+            if (!kState.IsKeyDown(fireKey))
+            {
+                foreach (Shots s in shots)
+                {
+                    if (s.alive == false)
+                        s.Set(Position, direction);
+                }
+            }
+
             Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
         }
         
@@ -218,6 +245,12 @@ namespace Huntr
                 effect, // no effects
                 0  // default layer
             );
+
+            foreach (Shots s in shots)
+            {
+                if(s.alive == true)
+                    s.Draw(gameTime, spriteBatch);
+            }
         }
 
         public void Gravity()

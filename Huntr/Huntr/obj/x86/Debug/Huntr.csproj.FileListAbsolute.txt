@@ -66,3 +66,4 @@ C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\Wind
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project 9 OClock\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
 C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
 D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Menu.xnb
+C:\Users\Zane\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Kunai.xnb
