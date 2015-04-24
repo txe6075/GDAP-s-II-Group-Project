@@ -26,21 +26,29 @@ namespace Huntr
     /// </summary>
     public class Game1 : Game
     {
+        //VARIABLES
 
+        //basic stuff
         KeyboardState kState = new KeyboardState();
-
         GraphicsDeviceManager graphics;
+
+        //stuff to load
         SpriteBatch spriteBatch;
         Texture2D environment1;
         Texture2D environment2;
         Texture2D environment3;
         Texture2D environment4;
         Texture2D playerSprite; // sprite for player object
-        Texture2D player2Sprite; // sprite for player object
+        Texture2D player2Sprite; // sprite for second player object
+        Texture2D heart;
         Texture2D kunai;
-        Player p1; // player 1 object
-        Player p2; // player 2 object
+        SpriteFont font;
+
+        //Unique classes
+        Player p1;
+        Player p2; 
         Map map;
+
         //Menu related attributes
         Menu menu;
         Texture2D menuSprite;
@@ -52,7 +60,7 @@ namespace Huntr
         public Game1()
             : base()
         {
-            Variables.playerNums = 0;
+            Variables.playerNums = 0; //sets a global variable
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -65,8 +73,9 @@ namespace Huntr
         /// </summary>
         protected override void Initialize()
         {
-            Window.SetPosition(new Point(0, 0));
-            // TODO: Add your initialization logic here
+            //***NOT OUR CODE**//
+            Window.SetPosition(new Point(0, 0));                            //NOT OUR CODE
+
             graphics.PreferredBackBufferWidth = Variables.screenWidth;      //setting the screen size
             graphics.PreferredBackBufferHeight = Variables.screenHeight;
             graphics.ApplyChanges(); 
@@ -79,16 +88,25 @@ namespace Huntr
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // basics
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //textures for on screen
+            heart = Content.Load<Texture2D>("redheart");
             environment1 = Content.Load<Texture2D>("tile1"); //loading in the different tiles
-            environment2 = Content.Load<Texture2D>("tile2"); //loading in the different tiles
-            environment3 = Content.Load<Texture2D>("tile3"); //loading in the different tiles
-            environment4 = Content.Load<Texture2D>("tile4"); //loading in the different tiles
-            kunai = Content.Load<Texture2D>("Kunai"); //loading in the different tiles
-            map = new Map(environment1, environment2, environment3, environment4);
+            environment2 = Content.Load<Texture2D>("tile2"); 
+            environment3 = Content.Load<Texture2D>("tile3");
+            environment4 = Content.Load<Texture2D>("tile4"); 
+            kunai = Content.Load<Texture2D>("Kunai"); 
             playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
-            player2Sprite = Content.Load<Texture2D>("redChar"); //loads the character sheets
+            player2Sprite = Content.Load<Texture2D>("redChar");
+
+            //fonts
+            font = Content.Load<SpriteFont>("font1");
+
+            //initializing our variables
+            map = new Map(environment1, environment2, environment3, environment4);
+            map.LoadMap("testMap.txt");
             p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 1); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), player2Sprite, kunai, 2); // instantiate the player 2 object
 
@@ -97,8 +115,6 @@ namespace Huntr
             menuSprite = Content.Load<Texture2D>("Menu");
             menu = new Menu(menuSprite, new Vector2(0, 0));
 
-            map.LoadMap("testMap.txt");
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -125,7 +141,7 @@ namespace Huntr
             p1.Update(kState); // update players
             p2.Update(kState);
 
-            // update character images
+            // update character images for animation
             p1.UpdateImg(gameTime, kState);
             p2.UpdateImg(gameTime, kState);
 
@@ -140,11 +156,12 @@ namespace Huntr
         {
             Update(gameTime);
 
-            Collision();
+            Collision(); //All collision is registered before drawing
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
             switch (state)
             {
                 case gameState.MainMenu://if the correct menu selection is selected and enter is pressed, switch to the correct game state
@@ -200,12 +217,13 @@ namespace Huntr
                 case gameState.SinglePlayer:
                     break;
                 case gameState.Multiplayer:
-                    map.Draw(gameTime, spriteBatch);
+                    map.Draw(gameTime, spriteBatch); //draw map
 
                     p1.Draw(gameTime, spriteBatch); // draw player 1
             
                     p2.Draw(gameTime, spriteBatch); // draw player 2
 
+                    ExtraSprites(spriteBatch); //Calls all extra in game stuff
 
                     break;
                 case gameState.Achievements:
@@ -213,103 +231,119 @@ namespace Huntr
 
             }
 
-            
-
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        public void Collision()
+        public void Collision() //All objects in game can collide here
         {
-            p1.Falsify();
+            p1.Falsify(); //Resets collision variables for retesting
             p2.Falsify();
-            foreach (Environment n in map.Environments)
+
+            foreach (Environment n in map.Environments) //interates through each tile once
             {
-                if (p1.Rect.Intersects(n.Rect))
+                if (p1.Rect.Intersects(n.Rect)) //compares them to player 1
                 {
-                    if (p1.Rect.Top > n.Rect.Bottom - 20)
+                    if (p1.Rect.Top > n.Rect.Bottom - 20) //checks for top and bottom first to decide whether or not to fall
                     {
-                        p1.top = true;
-                        p1.gravEffect = -1;
+                        p1.Top = true;
+                        p1.gravEffect = -1; //if your head hits something, this gives a bounce off effect
                     }
                     else if (p1.Rect.Bottom < n.Rect.Top + 20)
                     {
-                        p1.bottom = true; 
-                        p1.top = false;
+                        p1.Bottom = true; 
+                        p1.Top = false;
                         p1.Position = new Vector2(p1.Position.X, n.Position.Y - p1.Size.Y + 10);
                     }
-                    else if (p1.Rect.Left > n.Rect.Right - 20)
+                    else if (p1.Rect.Left > n.Rect.Right - 20) //then left and right are checked to see if movement that way is possible
                     {
-                        p1.left = true;
-                        p1.right = false;
+                        p1.Left = true;
+                        p1.Right = false;
                         p1.Position = new Vector2(n.Position.X + n.Size.X + 1, p1.Position.Y);
                     }
                     else if (p1.Rect.Right < n.Rect.Left + 20)
                     {
-                        p1.right = true;
-                        p1.left = false;
+                        p1.Right = true;
+                        p1.Left = false;
                         p1.Position = new Vector2(n.Position.X - p1.Size.X - 1, p1.Position.Y);
                     }
                 }
 
-                foreach (Shots s in p1.ShotList)
+                foreach (Shots s in p1.ShotList) //This checks to see if kunai collide with anything
                 {
-                    if (s.alive == true)
+                    if (s.Alive == true) //only checks if theyre active, saves time
                     {
-                        if (s.Rect.Intersects(n.Rect)) s.alive = false;
-                        if (s.Rect.Intersects(p2.Rect) && p2.Health > 0)
+                        if (s.Rect.Intersects(n.Rect)) s.Alive = false; //turns off the kunai
+                        if (s.Rect.Intersects(p2.Rect) && p2.Health > 0)    //if it hits a character
                         {
-                            s.alive = false;
-                            p2.charColor = Color.Red;
-                            p2.Health -= 1;
+                            s.Alive = false;                            //turns off kunai
+                            p2.CharColor = Color.Red;                   //turns hit player red for a sec
+                            p2.Health -= 1;                             //decreases their health
+                            if (p2.Health == 0) p1.KillCount += 1;      //if you kill them it increases your kill count
                         }
                     }
                 }
 
-                foreach (Shots s in p2.ShotList)
+                foreach (Shots s in p2.ShotList) //same as previous
                 {
-                    if (s.alive == true)
+                    if (s.Alive == true)
                     {
-                        if (s.Rect.Intersects(n.Rect)) s.alive = false;
+                        if (s.Rect.Intersects(n.Rect)) s.Alive = false;
                         if (s.Rect.Intersects(p1.Rect) && p2.Health > 0) 
                         {
-                            s.alive = false;
-                            p1.charColor = Color.Red;
+                            s.Alive = false;
+                            p1.CharColor = Color.Red;
                             p1.Health -= 1;
+                            if (p1.Health == 0) p2.KillCount += 1;
                         }
                     }
                 }
 
-                if (p2.Rect.Intersects(n.Rect))
+                if (p2.Rect.Intersects(n.Rect)) //same as previous
                 {
 
                     if (p2.Rect.Top > n.Rect.Bottom - 20)
                     {
-                        p2.top = true;
+                        p2.Top = true;
                         p2.gravEffect = -1;
                     }
                     else if (p2.Rect.Bottom < n.Rect.Top + 20)
                     {
-                        p2.bottom = true;
-                        p2.top = false;
+                        p2.Bottom = true;
+                        p2.Top = false;
                         p2.Position = new Vector2(p2.Position.X, n.Position.Y - p2.Size.Y + 10);
                     }
                     else if (p2.Rect.Left > n.Rect.Right - 20)
                     {
-                        p2.left = true;
-                        p2.right = false;
+                        p2.Left = true;
+                        p2.Right = false;
                         p2.Position = new Vector2(n.Position.X + n.Size.X + 1, p2.Position.Y);
                     }
                     else if (p2.Rect.Right < n.Rect.Left + 20)
                     {
-                        p2.right = true;
-                        p2.left = false;
+                        p2.Right = true;
+                        p2.Left = false;
                         p2.Position = new Vector2(n.Position.X - p2.Size.X - 1, p2.Position.Y);
                     }
 
                 }
             }
+        }
+
+        public void ExtraSprites(SpriteBatch spriteBatch)   //this prints all fonts and health and score
+        {                                                   //in one area for easier reading
+            spriteBatch.Draw(heart, new Rectangle(0, 0, 48, 48), Color.Blue);
+            spriteBatch.Draw(heart, new Rectangle(Variables.screenWidth - 48, 0, 48, 48), Color.White);
+
+            spriteBatch.DrawString(font, "" + p1.Health, new Vector2(15, 10), Color.White, 0, Vector2.Zero, 1.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "SCORE:", new Vector2(0, 50), Color.White, 0, Vector2.Zero, .6f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "" + p1.KillCount, new Vector2(5, 60), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+
+            spriteBatch.DrawString(font, "" + p2.Health, new Vector2(Variables.screenWidth - 33, 10), Color.White, 0, Vector2.Zero, 1.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "SCORE:", new Vector2(Variables.screenWidth - 48, 50), Color.White, 0, Vector2.Zero, .6f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "" + p2.KillCount, new Vector2(Variables.screenWidth - 43, 60), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+
         }
     }
 }

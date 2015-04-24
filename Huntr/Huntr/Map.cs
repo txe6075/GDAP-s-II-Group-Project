@@ -15,23 +15,26 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-namespace Huntr
+namespace Huntr //Done by Zane
 {
     class Map
     {
+
+        //Variables
+        private Texture2D environment1;
+        private Texture2D environment2;
+        private Texture2D environment3;
+        private Texture2D environment4;
+
         private List<Environment> environments;
 
+        //properties
         public List<Environment> Environments
         {
             get { return environments; }
         }
 
-        Texture2D environment1;
-        Texture2D environment2;
-        Texture2D environment3;
-        Texture2D environment4;
-
-        public Map(Texture2D ev1, Texture2D ev2, Texture2D ev3, Texture2D ev4)
+        public Map(Texture2D ev1, Texture2D ev2, Texture2D ev3, Texture2D ev4) //all the textures needed
         {
             environments = new List<Environment>();
             environment1 = ev1;
@@ -40,7 +43,7 @@ namespace Huntr
             environment4 = ev4;
         }
 
-        public void LoadMap(string fileName){
+        public void LoadMap(string fileName){ //takes the map name and read it in 
             StreamReader input = new StreamReader(fileName);
             try
             {
@@ -51,7 +54,7 @@ namespace Huntr
                 {
                     string[] words = text.Split();
                     int j = 0;
-                    foreach (string word in words)
+                    foreach (string word in words) //read each different number and assigns the proper texture
                     {
                         if (int.Parse(word) == 1)
                         {
@@ -93,11 +96,11 @@ namespace Huntr
                 spriteBatch.Draw(
                     tile.TextureImage, // spritesheet
                     tile.Position, // where to draw in window
-                    new Rectangle(0, 0, 32, 32), // pick out a section of spritesheet
+                    new Rectangle(0, 0, 64, 64), // pick out a section of spritesheet
                     Color.White, // dont change image color
                     0, // don't rotate the image
                     Vector2.Zero, // rotation center (not used)
-                    1.5f, // scaling factor - dont change image size
+                    .75f, // scaling factor - dont change image size
                     SpriteEffects.None, // no effects
                     0  // default layer
                 );

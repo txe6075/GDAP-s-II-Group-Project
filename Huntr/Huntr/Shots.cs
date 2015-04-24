@@ -14,38 +14,50 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-namespace Huntr
+namespace Huntr //Filled and completed by Zane Draper
 {
 
     class Shots: Actives
     {
-        public int direction;
-        public int angle;
-        public int count;
-        public bool alive;
-        private Vector2 origin;
+        //Variables
 
-        public Shots(Vector2 pos, Point s, Texture2D ti)
+        private int direction;      //between left and right
+        private int angle;          //rotation of kunai
+        private int count;          //keeps the kunai from rotating too fast
+        private bool alive;         //whether or not the kunai is active
+        private Vector2 origin;     //the point the kunai rotates around
+
+        //properties
+        public bool Alive
+        {
+            get { return alive; }
+            set { alive = value; }
+        }
+
+        public Shots(Vector2 pos, Point s, Texture2D ti) //uses base constructor
             : base(pos, s, ti)
         {
-            direction = 1;
+            direction = 1;          //initializing variables
             angle = 0;
             alive = false;
             count = 0;
             origin = new Vector2();
         }
-        public override void Update(KeyboardState kState) { }
+        public override void Update(KeyboardState kState) //unneccesary function. need to rebuild the hierarchy
+        {
+            throw new NotImplementedException();
+        }
 
-        public void Update()
+        public void Update() //updates rotation and location automatically
         {
             count++;
             int distance = 0;
-            if (direction == 1)
+            if (direction == 1) //left
             {
                 Position = new Vector2(Position.X - 8, Position.Y);
                 distance = -1;
             }
-            else if (direction == 2)
+            else if (direction == 2) //right
             {
                 Position = new Vector2(Position.X + 8, Position.Y);
                 distance = 1;
@@ -53,22 +65,22 @@ namespace Huntr
 
             if (count >= 4)
             {
-                angle += distance;
+                angle += distance; //degree the angle changes by
                 count = 0;
             }
 
-            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
+            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y }; //keep the rectangle the same, because of such a small change in area
             origin = new Vector2(Size.X / 2, Size.Y / 2);
         }
 
-        public void Set(Vector2 pos, int dir)
+        public void Set(Vector2 pos, int dir) //initializes the kunai when needed (wanted to fully use pooling for memory allocation, this is similar)
         {
-            this.Position = new Vector2(pos.X, pos.Y);
-            direction = dir;
+            this.Position = new Vector2(pos.X, pos.Y); //players location
+            direction = dir;                            //players direction
             angle = 0;
             alive = true;
             origin = new Vector2(Size.X / 2, Size.Y / 2);
-            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
+            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };     //updates rectangle to new location
         }
 
         public override void UpdateImg(GameTime gameTime, KeyboardState kState)
