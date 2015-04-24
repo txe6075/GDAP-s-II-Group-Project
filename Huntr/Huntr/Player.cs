@@ -40,8 +40,16 @@ namespace Huntr
         public bool firePress;
         public int gravEffect;
         private int gravCounter;
+        private int deathCounter;
 
         private int direction;
+        private int health;
+
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
 
         private Shots[] shots = new Shots[5];
 
@@ -51,6 +59,8 @@ namespace Huntr
         Rectangle charRect = new Rectangle(0, 463, 60, 128); // character is facing forward initially
         // standing frame y position
         const int STANDING_Y = 463;
+        //dead fram y position;
+        const int DEAD_Y = 591;
         // running frame y position
         const int RUNNING_Y = 230;
         // jumping frame y position
@@ -64,13 +74,18 @@ namespace Huntr
         // standing frame sizes
         const int STAND_WIDTH = 60;
         const int STAND_HEIGHT = 128;
+        // death frame sizes
+        const int DEAD_WIDTH = 123;
+        const int DEAD_HEIGHT = 127;
+
+
         int frame;
         int framesElapsed;
         int numFrames = 10;
         double timePerFrame = 100;
 
         // enumeration
-        enum CharState { runLeft, runRight, faceForward, jump }
+        enum CharState { runLeft, runRight, faceForward, jump, dead }
         CharState charState = CharState.faceForward;
 
         public Player(Vector2 pos, Point s, Texture2D ti, Texture2D kunai, int num)
@@ -104,6 +119,8 @@ namespace Huntr
             gravEffect = 0;
             gravCounter = 0;
             colorCount = 0;
+            deathCounter = 0;
+            health = 5;
 
             charColor = Color.White;
 
@@ -120,84 +137,112 @@ namespace Huntr
             framesElapsed = (int)(gameTime.TotalGameTime.TotalMilliseconds / timePerFrame);
             frame = framesElapsed % numFrames;
 
-            // character is running right
-            if (kState.IsKeyDown(rightKey))
+            if (charState == CharState.dead)
             {
-                charState = CharState.runRight;
-            }
-            // character is running left
-            if (kState.IsKeyDown(leftKey))
-            {
-                charState = CharState.runLeft;
-            }
-            // character is jumping
-            if (kState.IsKeyDown(upKey))
-            {
-                charState = CharState.jump;
-            }
+                frame = ((int)((deathCounter+=3) / timePerFrame)) % numFrames;
 
-            if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
-            {
-                charState = CharState.faceForward;
-            }
+                if (direction == 1)
+                {
+                    charRect = new Rectangle(5 + frame * DEAD_WIDTH, DEAD_Y, DEAD_WIDTH, DEAD_HEIGHT);
+                    effect = SpriteEffects.FlipHorizontally;
+                }
 
-            // finite state machine code
-            switch (charState)
-            {
-                case CharState.jump:
-                    charState = CharState.jump;
-                    break;
-                case CharState.runLeft:
-                    charState = CharState.runLeft;
-                    break;
-                case CharState.runRight:
-                    charState = CharState.runRight;
-                    break;
-                default:
+                else if (direction == 2)
+                {
+                    charRect = new Rectangle(5 + frame * DEAD_WIDTH, DEAD_Y, DEAD_WIDTH, DEAD_HEIGHT);
+                    effect = SpriteEffects.None;
+                }
+                if (frame >= 9)
+                {
+                    health = 5;
                     charState = CharState.faceForward;
-                    break;
-            }
+                    deathCounter = 0;
+                    if (playerNum == 1) Position = new Vector2(120, Variables.screenHeight - 250);
+                    else if (playerNum == 2) Position = new Vector2(Variables.screenWidth - 150, Variables.screenHeight - 250);
+                }
 
-            if (charState == CharState.runLeft)
-            {
-                charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
-                direction = 1;
-                effect = SpriteEffects.FlipHorizontally;
             }
+            else
+            {
+                // character is running right
+                if (kState.IsKeyDown(rightKey))
+                {
+                    charState = CharState.runRight;
+                }
+                // character is running left
+                if (kState.IsKeyDown(leftKey))
+                {
+                    charState = CharState.runLeft;
+                }
+                // character is jumping
+                if (kState.IsKeyDown(upKey))
+                {
+                    charState = CharState.jump;
+                }
 
-            if (charState == CharState.runRight)
-            {
-                charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
-                direction = 2;
-                effect = SpriteEffects.None;
-            }
+                if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
+                {
+                    charState = CharState.faceForward;
+                }
 
-            if (charState == CharState.jump && kState.IsKeyDown(leftKey))
-            {
-                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
-                direction = 1;
-                effect = SpriteEffects.FlipHorizontally;
-            }
-            else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
-            {
-                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
-                direction = 2;
-                effect = SpriteEffects.None;
-            }
-            else if (charState == CharState.jump)
-            {
-                charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
-            }
+                // finite state machine code
+                switch (charState)
+                {
+                    case CharState.jump:
+                        charState = CharState.jump;
+                        break;
+                    case CharState.runLeft:
+                        charState = CharState.runLeft;
+                        break;
+                    case CharState.runRight:
+                        charState = CharState.runRight;
+                        break;
+                    default:
+                        charState = CharState.faceForward;
+                        break;
+                }
 
-            if (charState == CharState.faceForward)
-            {
-                charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
-            }
+                if (charState == CharState.runLeft)
+                {
+                    charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                    direction = 1;
+                    effect = SpriteEffects.FlipHorizontally;
+                }
 
-            // make sure jumping animation doesnt happen while on the ground
-            if (charState != CharState.runLeft && charState != CharState.runRight && bottom == true)
-            {
-                charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
+                if (charState == CharState.runRight)
+                {
+                    charRect = new Rectangle(5 + frame * RUN_WIDTH, RUNNING_Y, RUN_WIDTH, RUN_HEIGHT);
+                    direction = 2;
+                    effect = SpriteEffects.None;
+                }
+
+                if (charState == CharState.jump && kState.IsKeyDown(leftKey))
+                {
+                    charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                    direction = 1;
+                    effect = SpriteEffects.FlipHorizontally;
+                }
+                else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
+                {
+                    charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                    direction = 2;
+                    effect = SpriteEffects.None;
+                }
+                else if (charState == CharState.jump)
+                {
+                    charRect = new Rectangle(5 + frame * JUMP_WIDTH, JUMPING_Y, JUMP_WIDTH, JUMP_HEIGHT);
+                }
+
+                if (charState == CharState.faceForward)
+                {
+                    charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
+                }
+
+                // make sure jumping animation doesnt happen while on the ground
+                if (charState != CharState.runLeft && charState != CharState.runRight && bottom == true)
+                {
+                    charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
+                }
             }
 
             if (charColor == Color.Red) colorCount++;
@@ -211,46 +256,52 @@ namespace Huntr
         public override void Update(KeyboardState kState)
         {
             Gravity();
-
-            if (Position.Y <= 36) Position = new Vector2(Position.X, 37);
-
-            if (kState.IsKeyDown(rightKey) && right == false)
+            if (health == 0)
             {
-                left = false;
-
-                Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
+                charState = CharState.dead;
             }
-            if (kState.IsKeyDown(leftKey) && left == false)
+            else
             {
-                right = false;
+                if (Position.Y <= 36) Position = new Vector2(Position.X, 37);
 
-                Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
-            }
-            if (kState.IsKeyDown(upKey) && top == false && jumpPress == false)
-            {
-                top = true;
-                bottom = false;
-                jumpPress = true;
-
-                Position = new Vector2(Position.X, Position.Y - 10);
-
-                gravEffect = 5;
-            }
-            else if (!kState.IsKeyDown(upKey)) jumpPress = false;
-
-            if (kState.IsKeyDown(fireKey) && firePress == false)
-            {
-                foreach (Shots s in shots)
+                if (kState.IsKeyDown(rightKey) && right == false)
                 {
-                    if (s.alive == false)
-                    {
-                        s.Set(Position, direction);
-                        break;
-                    }
+                    left = false;
+
+                    Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
                 }
-                firePress = true;
+                if (kState.IsKeyDown(leftKey) && left == false)
+                {
+                    right = false;
+
+                    Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
+                }
+                if (kState.IsKeyDown(upKey) && top == false && jumpPress == false)
+                {
+                    top = true;
+                    bottom = false;
+                    jumpPress = true;
+
+                    Position = new Vector2(Position.X, Position.Y - 10);
+
+                    gravEffect = 5;
+                }
+                else if (!kState.IsKeyDown(upKey)) jumpPress = false;
+
+                if (kState.IsKeyDown(fireKey) && firePress == false)
+                {
+                    foreach (Shots s in shots)
+                    {
+                        if (s.alive == false)
+                        {
+                            s.Set(Position, direction);
+                            break;
+                        }
+                    }
+                    firePress = true;
+                }
+                else if (!kState.IsKeyDown(fireKey) && firePress == true) firePress = false;
             }
-            else if (!kState.IsKeyDown(fireKey) && firePress == true) firePress = false;
 
             Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
         }

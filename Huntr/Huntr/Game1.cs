@@ -252,10 +252,11 @@ namespace Huntr
                     if (s.alive == true)
                     {
                         if (s.Rect.Intersects(n.Rect)) s.alive = false;
-                        if (s.Rect.Intersects(p2.Rect))
+                        if (s.Rect.Intersects(p2.Rect) && p2.Health > 0)
                         {
                             s.alive = false;
                             p2.charColor = Color.Red;
+                            p2.Health -= 1;
                         }
                     }
                 }
@@ -265,10 +266,11 @@ namespace Huntr
                     if (s.alive == true)
                     {
                         if (s.Rect.Intersects(n.Rect)) s.alive = false;
-                        if (s.Rect.Intersects(p1.Rect)) 
+                        if (s.Rect.Intersects(p1.Rect) && p2.Health > 0) 
                         {
                             s.alive = false;
                             p1.charColor = Color.Red;
+                            p1.Health -= 1;
                         }
                     }
                 }
