@@ -247,6 +247,32 @@ namespace Huntr
                     }
                 }
 
+                foreach (Shots s in p1.ShotList)
+                {
+                    if (s.alive == true)
+                    {
+                        if (s.Rect.Intersects(n.Rect)) s.alive = false;
+                        if (s.Rect.Intersects(p2.Rect))
+                        {
+                            s.alive = false;
+                            p2.charColor = Color.Red;
+                        }
+                    }
+                }
+
+                foreach (Shots s in p2.ShotList)
+                {
+                    if (s.alive == true)
+                    {
+                        if (s.Rect.Intersects(n.Rect)) s.alive = false;
+                        if (s.Rect.Intersects(p1.Rect)) 
+                        {
+                            s.alive = false;
+                            p1.charColor = Color.Red;
+                        }
+                    }
+                }
+
                 if (p2.Rect.Intersects(n.Rect))
                 {
 

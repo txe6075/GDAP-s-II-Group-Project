@@ -28,17 +28,24 @@ namespace Huntr
         Keys upKey;
         Keys downKey;
         Keys fireKey;
+
+        public Color charColor;
+        private int colorCount;
+
         public bool left;
         public bool right;
         public bool bottom;
         public bool top;
         public bool jumpPress;
+        public bool firePress;
         public int gravEffect;
         private int gravCounter;
 
         private int direction;
 
-        Shots[] shots = new Shots[5];
+        private Shots[] shots = new Shots[5];
+
+        public Shots[] ShotList { get { return shots; } }
 
         // attributes for updating the image
         Rectangle charRect = new Rectangle(0, 463, 60, 128); // character is facing forward initially
@@ -93,12 +100,16 @@ namespace Huntr
             bottom = false;
             top = false;
             jumpPress = false;
+            firePress = false;
             gravEffect = 0;
             gravCounter = 0;
+            colorCount = 0;
+
+            charColor = Color.White;
 
             for (int i = 0; i < 5; i++)
             {
-                shots[i] = new Shots(Position, Size, kunai);
+                shots[i] = new Shots(new Vector2(0,0), new Point(8, 32), kunai);
             }
         }
 
@@ -188,6 +199,13 @@ namespace Huntr
             {
                 charRect = new Rectangle(0, STANDING_Y, STAND_WIDTH, STAND_HEIGHT);
             }
+
+            if (charColor == Color.Red) colorCount++;
+            if (charColor == Color.Red && colorCount >= 10)
+            {
+                charColor = Color.White;
+                colorCount = 0;
+            }
         }
 
         public override void Update(KeyboardState kState)
@@ -220,14 +238,19 @@ namespace Huntr
             }
             else if (!kState.IsKeyDown(upKey)) jumpPress = false;
 
-            if (!kState.IsKeyDown(fireKey))
+            if (kState.IsKeyDown(fireKey) && firePress == false)
             {
                 foreach (Shots s in shots)
                 {
                     if (s.alive == false)
+                    {
                         s.Set(Position, direction);
+                        break;
+                    }
                 }
+                firePress = true;
             }
+            else if (!kState.IsKeyDown(fireKey) && firePress == true) firePress = false;
 
             Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };
         }
@@ -238,7 +261,7 @@ namespace Huntr
                 TextureImage, // spritesheet
                 Position, // where to draw in window
                 charRect, // pick out a section of spritesheet
-                Color.White, // dont change image color
+                charColor, // dont change image color
                 0, // don't rotate the image
                 Vector2.Zero, // rotation center (not used)
                 .5f, // scaling factor - scale image down to .4
@@ -248,8 +271,11 @@ namespace Huntr
 
             foreach (Shots s in shots)
             {
-                if(s.alive == true)
+                if (s.alive == true)
+                {
+                    s.Update();
                     s.Draw(gameTime, spriteBatch);
+                }
             }
         }
 
