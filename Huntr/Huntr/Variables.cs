@@ -30,13 +30,13 @@ namespace Huntr
         // running frame y position
         public static int RUNNING_Y = 230;
         // jumping frame y position
-        public static int JUMPING_Y = 105;
+        public static int JUMPING_Y = 110;
         // running frame sizes
         public static int RUN_WIDTH = 92;
         public static int RUN_HEIGHT = 116;
         // jumping frame sizes
-        public static int JUMP_WIDTH = 90;
-        public static int JUMP_HEIGHT = 119;
+        public static int JUMP_WIDTH = 92;
+        public static int JUMP_HEIGHT = 120;
         // standing frame sizes
         public static int STAND_WIDTH = 60;
         public static int STAND_HEIGHT = 128;

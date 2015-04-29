@@ -222,7 +222,7 @@ namespace Huntr
                 {
                     charState = CharState.jump;
                 }
-
+                
                 if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
                 {
                     charState = CharState.faceForward;
@@ -245,6 +245,7 @@ namespace Huntr
                         break;
                 }
 
+                // character is running left
                 if (charState == CharState.runLeft)
                 {
                     charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
@@ -252,6 +253,7 @@ namespace Huntr
                     effect = SpriteEffects.FlipHorizontally;
                 }
 
+                // character is running right
                 if (charState == CharState.runRight)
                 {
                     charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
@@ -259,33 +261,39 @@ namespace Huntr
                     effect = SpriteEffects.None;
                 }
 
+                // character is jumping left
                 if (charState == CharState.jump && kState.IsKeyDown(leftKey))
                 {
-                    charRect = new Rectangle(5 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
+                    charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                     direction = 1;
                     effect = SpriteEffects.FlipHorizontally;
                 }
+                // character is jumping right
                 else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
                 {
-                    charRect = new Rectangle(5 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
+                    charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                     direction = 2;
                     effect = SpriteEffects.None;
                 }
+                // character is jumping straight up
                 else if (charState == CharState.jump)
                 {
-                    charRect = new Rectangle(5 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
+                    charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                 }
 
+                // character is not moving
                 if (charState == CharState.faceForward)
                 {
-                    charRect = new Rectangle(5 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
+                    charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
                 }
 
-                // make sure jumping animation doesnt happen while on the ground
-                if (charState != CharState.runLeft && charState != CharState.runRight && bottom == true)
+                // keeps the character jumping if the jump key is held down
+
+
+                // checks to see if character is falling
+                if (bottom == false)
                 {
-                    charRect = new Rectangle(frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
-                    timePerFrame = 100;
+                    charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT); // cycle through jump animation
                 }
             }
 
