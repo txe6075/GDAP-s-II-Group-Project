@@ -119,7 +119,7 @@ namespace Huntr
 
 
         // enumeration
-        enum CharState { runLeft, runRight, faceForward, jump, dead }
+        enum CharState { runLeft, runRight, faceForward, jump, dead, slide}
         CharState charState = CharState.faceForward;
 
 
@@ -222,7 +222,13 @@ namespace Huntr
                 {
                     charState = CharState.jump;
                 }
+                // character is sliding
+                if (kState.IsKeyDown(downKey))
+                {
+                    charState = CharState.slide;
+                }
                 
+                // character is not moving
                 if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
                 {
                     charState = CharState.faceForward;
@@ -239,6 +245,9 @@ namespace Huntr
                         break;
                     case CharState.runRight:
                         charState = CharState.runRight;
+                        break;
+                    case CharState.slide:
+                        charState = CharState.slide;
                         break;
                     default:
                         charState = CharState.faceForward;
@@ -281,14 +290,53 @@ namespace Huntr
                     charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                 }
 
+                // character is sliding left
+                if (charState == CharState.slide && kState.IsKeyDown(leftKey))
+                {
+                    charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
+                    direction = 1;
+                    effect = SpriteEffects.FlipHorizontally;
+                    if (frame > 9) // keeps character from sliding forever
+                    {
+                        charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
+                    }
+                }
+                // character is sliding right
+                else if (charState == CharState.slide && kState.IsKeyDown(rightKey))
+                {
+                    charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
+                    direction = 2;
+                    effect = SpriteEffects.None;
+                    if (frame > 9) // keeps character from sliding forever
+                    {
+                        charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
+                    }
+                }
+
                 // character is not moving
                 if (charState == CharState.faceForward)
                 {
                     charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
                 }
 
-                // keeps the character jumping if the jump key is held down
-
+                // makes sure jump animation doesnt happen when on the ground
+                if (charState == CharState.jump && bottom == true)
+                {
+                    charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
+                    // running animations play even while the jump key is held down
+                    if (kState.IsKeyDown(leftKey)) // running left
+                    {
+                        charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
+                        direction = 1;
+                        effect = SpriteEffects.FlipHorizontally;
+                    }
+                    else if (kState.IsKeyDown(rightKey)) // running right
+                    {
+                        charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
+                        direction = 2;
+                        effect = SpriteEffects.None;
+                    }
+                }
 
                 // checks to see if character is falling
                 if (bottom == false)
