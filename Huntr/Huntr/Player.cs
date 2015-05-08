@@ -213,17 +213,17 @@ namespace Huntr
                     charState = CharState.runRight;
                 }
                 // character is running left
-                if (kState.IsKeyDown(leftKey))
+                else if (kState.IsKeyDown(leftKey))
                 {
                     charState = CharState.runLeft;
                 }
                 // character is jumping
-                if (kState.IsKeyDown(upKey))
+                else if (kState.IsKeyDown(upKey))
                 {
                     charState = CharState.jump;
                 }
                 // character is sliding
-                if (kState.IsKeyDown(downKey))
+                else if (kState.IsKeyDown(downKey))
                 {
                     charState = CharState.slide;
                 }
@@ -255,7 +255,7 @@ namespace Huntr
                 }
 
                 // character is running left
-                if (charState == CharState.runLeft)
+                if (charState == CharState.runLeft && left == false)
                 {
                     charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
                     direction = 1;
@@ -263,7 +263,7 @@ namespace Huntr
                 }
 
                 // character is running right
-                if (charState == CharState.runRight)
+                if (charState == CharState.runRight && right == false)
                 {
                     charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
                     direction = 2;
@@ -271,7 +271,7 @@ namespace Huntr
                 }
 
                 // character is jumping left
-                if (charState == CharState.jump && kState.IsKeyDown(leftKey))
+                if (charState == CharState.jump && kState.IsKeyDown(leftKey) && left == false)
                 {
                     charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                     direction = 1;
