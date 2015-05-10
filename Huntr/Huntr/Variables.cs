@@ -49,5 +49,8 @@ namespace Huntr
         // sliding frame sizes
         public static int SLIDE_WIDTH = 95;
         public static int SLIDE_HEIGHT = 90;
+
+        //Pause variables
+        public static Boolean isPaused = false;
     }
 }

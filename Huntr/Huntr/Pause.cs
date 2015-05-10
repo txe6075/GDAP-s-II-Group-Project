@@ -1,10 +1,4 @@
-﻿/*
- * Team: Elimmination Platform
- * 
- * All menu info and objects
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +12,9 @@ using System.Threading;
 
 namespace Huntr
 {
-    class Menu
+    class Pause
     {
-        //attributes
-        public enum gameState { MainMenu, Exit, Multiplayer, Achievements };
-        gameState state;
+        //Attributes
         Texture2D texture;
         Texture2D button1;
         Texture2D button2;
@@ -31,10 +23,12 @@ namespace Huntr
         Vector2 button1Pos;
         Vector2 button2Pos;
         Vector2 button3Pos;
-        int option = 0; //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
-        Boolean enterPressed;
 
-        public Menu(Texture2D txtr, Vector2 pos, Texture2D but1, Vector2 but1Pos, Texture2D but2, Vector2 but2Pos, Texture2D but3, Vector2 but3Pos)
+        int option = 0; //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
+        Boolean enterPressed = false;
+
+        //Constructor
+        public Pause(Texture2D txtr, Vector2 pos, Texture2D but1, Vector2 but1Pos, Texture2D but2, Vector2 but2Pos, Texture2D but3, Vector2 but3Pos)
         {
             texture = txtr;
             position = pos;
@@ -48,6 +42,7 @@ namespace Huntr
             button3 = but3;
             button3Pos = but3Pos;
         }
+
 
         public Boolean CheckPress
         {
@@ -88,7 +83,7 @@ namespace Huntr
                     }
 
                     Thread.Sleep(100);
-                    
+
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.S))
                 {
@@ -103,12 +98,12 @@ namespace Huntr
                     }
                     Thread.Sleep(100);
                 }
-                
+
                 Draw(gameTime, spriteBatch);
                 DrawButtons(gameTime, spriteBatch, option);
                 return option;
-                
-                
+
+
             }
         }
 
@@ -128,10 +123,9 @@ namespace Huntr
             );
         }
 
-
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch, int option)
         {
-            if(option == 0)
+            if (option == 0)
             {
                 spriteBatch.Draw(
                 button1, // spritesheet
@@ -169,7 +163,7 @@ namespace Huntr
                 0  // default layer
                 );
             }
-            else if(option == 1)
+            else if (option == 1)
             {
                 spriteBatch.Draw(
                 button2, // spritesheet
@@ -207,7 +201,7 @@ namespace Huntr
                 0  // default layer
                 );
             }
-            else if(option == 2)
+            else if (option == 2)
             {
                 spriteBatch.Draw(
                 button1, // spritesheet
@@ -245,10 +239,6 @@ namespace Huntr
                 0  // default layer
                 );
             }
-            //Two Draws to show the buttons and whether or not they're highlighted
-            
-
-            
         }
     }
 }

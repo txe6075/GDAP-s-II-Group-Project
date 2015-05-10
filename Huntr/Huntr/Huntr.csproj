@@ -46,6 +46,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="OnScreen.cs" />
+    <Compile Include="Pause.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PowerUps.cs" />
     <Compile Include="Program.cs" />
@@ -145,6 +146,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Achievement Screen.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Paused Screen.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Resume Button.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Main Menu Button.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

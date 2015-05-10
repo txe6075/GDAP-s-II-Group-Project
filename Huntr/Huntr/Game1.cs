@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-
+using System.Threading;
 #endregion
 
 namespace Huntr
@@ -62,6 +62,12 @@ namespace Huntr
         //Achievement Screen attributes
         Texture2D achieveScreenSprite;
         Achievements achieve;
+
+        //Pause Screen Attributes
+        Texture2D pauseSprite;
+        Texture2D resumeButton;
+        Texture2D mainMenuButton;
+        Pause pause;
 
 
         public Game1()
@@ -128,6 +134,13 @@ namespace Huntr
             //Achievement Stuff
             achieveScreenSprite = Content.Load<Texture2D>("Achievement Screen");
             achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0));
+
+            //Pause 
+            pauseSprite = Content.Load<Texture2D>("Paused Screen");
+            resumeButton = Content.Load<Texture2D>("Resume Button");
+            mainMenuButton = Content.Load<Texture2D>("Main Menu Button");
+            pause = new Pause(pauseSprite, new Vector2(0, 0), resumeButton, new Vector2(600, 400), mainMenuButton, new Vector2(600,500), button3Sprite, new Vector2(600, 600));
+
         }
 
         /// <summary>
@@ -149,16 +162,24 @@ namespace Huntr
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            kState = Keyboard.GetState(); //registers button pushes
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                Variables.isPaused = true;
+            }
 
-            p1.Update(kState); // update players
-            p2.Update(kState);
+            if (Variables.isPaused == false)
+            {
+                kState = Keyboard.GetState(); //registers button pushes
 
-            // update character images for animation
-            p1.UpdateImg(gameTime, kState);
-            p2.UpdateImg(gameTime, kState);
+                p1.Update(kState); // update players
+                p2.Update(kState);
 
-            base.Update(gameTime);
+                // update character images for animation
+                p1.UpdateImg(gameTime, kState);
+                p2.UpdateImg(gameTime, kState);
+
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -190,6 +211,8 @@ namespace Huntr
                         switch (option)
                         {
                             case 0: state = gameState.Multiplayer;
+                                pause.CheckPress = false;
+                                option = 0;
                                 break;
                             case 1: state = gameState.Achievements;
                                 break;
@@ -210,6 +233,32 @@ namespace Huntr
                     p2.Draw(gameTime, spriteBatch); // draw player 2
 
                     ExtraSprites(spriteBatch); //Calls all extra in game stuff
+
+                    //Draw the pause menu and enable navigation
+                    if(Variables.isPaused)
+                    {
+                        //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
+                        pause.Draw(gameTime, spriteBatch);
+                        //menu.DrawButtons(gameTime, spriteBatch, option);
+                        option = pause.Navigate(gameTime, spriteBatch, option);
+                        if (pause.CheckPress == true)
+                        {
+                            switch (option)
+                            {
+                                case 0: Variables.isPaused = false;
+                                    pause.CheckPress = false;
+                                    break;
+                                case 1: state = gameState.MainMenu;
+                                    menu.CheckPress = false;
+                                    option = 1;
+                                    Thread.Sleep(100);
+                                    
+                                    break;
+                                case 2: state = gameState.Exit;
+                                    break;
+                            }
+                        }
+                    }
 
                     break;
                 case gameState.Achievements:
