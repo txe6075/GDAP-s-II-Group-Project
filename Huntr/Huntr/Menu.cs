@@ -60,7 +60,7 @@ namespace Huntr
             option = opt;
             while (true)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter)) //detect when the enter key is pressed
+                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start)) //detect when the enter key is pressed
                 {
                     enterPressed = true;
                     switch (option)
@@ -75,7 +75,7 @@ namespace Huntr
                     enterPressed = true;
                     return option;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.W)) //pressed up, move the cursor up (decrease option)
+                if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y >= .5) //pressed up, move the cursor up (decrease option)
                 {
                     //if value is 0, don't decrease it
                     if (option == 0)
@@ -90,7 +90,7 @@ namespace Huntr
                     Thread.Sleep(100);
                     
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                else if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y <= -.5)
                 {
                     //if option is 3, don't increase it
                     if (option == 2)

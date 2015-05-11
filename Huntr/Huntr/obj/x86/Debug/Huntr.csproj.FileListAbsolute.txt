@@ -142,3 +142,6 @@ D:\Users\ztd9457\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\obj\x86\Debug\Hun
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Paused Screen.xnb
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Resume Button.xnb
 C:\Users\Tristan\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Main Menu Button.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Paused Screen.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Resume Button.xnb
+D:\Users\pd1876\Documents\GDAP-s-II-Group-Project\Huntr\Huntr\bin\WindowsGL\Debug\Content\Main Menu Button.xnb

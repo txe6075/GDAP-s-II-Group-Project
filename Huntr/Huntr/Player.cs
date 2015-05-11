@@ -178,7 +178,7 @@ namespace Huntr
         }
 
         // updates the player image depending on key presses
-        public override void UpdateImg(GameTime gameTime, KeyboardState kState)
+        public override void UpdateImg(GameTime gameTime, KeyboardState kState, GamePadState gState)
         {
             // Calculate the frame to draw based on the time
             framesElapsed = (int)(gameTime.TotalGameTime.TotalMilliseconds / timePerFrame);
@@ -208,28 +208,28 @@ namespace Huntr
             else
             {
                 // character is running right
-                if (kState.IsKeyDown(rightKey))
+                if (gState.ThumbSticks.Left.X >= .5)
                 {
                     charState = CharState.runRight;
                 }
                 // character is running left
-                else if (kState.IsKeyDown(leftKey))
+                else if (gState.ThumbSticks.Left.X <= -.5)
                 {
                     charState = CharState.runLeft;
                 }
                 // character is jumping
-                else if (kState.IsKeyDown(upKey))
+                else if (gState.IsButtonUp(Buttons.A))
                 {
                     charState = CharState.jump;
                 }
                 // character is sliding
-                else if (kState.IsKeyDown(downKey))
+                else if (gState.IsButtonDown(Buttons.B))
                 {
                     charState = CharState.slide;
                 }
                 
                 // character is not moving
-                if (kState.IsKeyUp(rightKey) && kState.IsKeyUp(leftKey) && kState.IsKeyUp(upKey))
+                if (gState.ThumbSticks.Left.X < .5 && gState.ThumbSticks.Left.X > -.5 && gState.IsButtonUp(Buttons.A))
                 {
                     charState = CharState.faceForward;
                 }
@@ -271,14 +271,14 @@ namespace Huntr
                 }
 
                 // character is jumping left
-                if (charState == CharState.jump && kState.IsKeyDown(leftKey) && left == false)
+                if (charState == CharState.jump && gState.ThumbSticks.Left.X <= -.5 && left == false)
                 {
                     charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                     direction = 1;
                     effect = SpriteEffects.FlipHorizontally;
                 }
                 // character is jumping right
-                else if (charState == CharState.jump && kState.IsKeyDown(rightKey))
+                else if (charState == CharState.jump && gState.ThumbSticks.Left.X >= .5)
                 {
                     charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
                     direction = 2;
@@ -291,7 +291,7 @@ namespace Huntr
                 }
 
                 // character is sliding left
-                if (charState == CharState.slide && kState.IsKeyDown(leftKey))
+                if (charState == CharState.slide && gState.ThumbSticks.Left.X <= -.5)
                 {
                     charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
                     direction = 1;
@@ -302,7 +302,7 @@ namespace Huntr
                     }
                 }
                 // character is sliding right
-                else if (charState == CharState.slide && kState.IsKeyDown(rightKey))
+                else if (charState == CharState.slide && gState.ThumbSticks.Left.X >= .5)
                 {
                     charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
                     direction = 2;
@@ -324,13 +324,13 @@ namespace Huntr
                 {
                     charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
                     // running animations play even while the jump key is held down
-                    if (kState.IsKeyDown(leftKey)) // running left
+                    if (gState.ThumbSticks.Left.X <= -.5) // running left
                     {
                         charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
                         direction = 1;
                         effect = SpriteEffects.FlipHorizontally;
                     }
-                    else if (kState.IsKeyDown(rightKey)) // running right
+                    else if (gState.ThumbSticks.Left.X >= .5) // running right
                     {
                         charRect = new Rectangle(5 + frame * Variables.RUN_WIDTH, Variables.RUNNING_Y, Variables.RUN_WIDTH, Variables.RUN_HEIGHT);
                         direction = 2;
@@ -354,7 +354,7 @@ namespace Huntr
             }
         }
 
-        public override void Update(KeyboardState kState)
+        public override void Update(KeyboardState kState, GamePadState gState)
         {
             Gravity();//Gravity happens first
 
@@ -366,19 +366,19 @@ namespace Huntr
             {
                 if (Position.Y <= 36) Position = new Vector2(Position.X, 37);       //keeps the player within the map
 
-                if (kState.IsKeyDown(rightKey) && right == false)                   //lets you move right when there is no tile
+                if (gState.ThumbSticks.Left.X >= .5 && right == false)                   //lets you move right when there is no tile
                 {
                     left = false; timePerFrame = 40;                                //increases the speed of run animation
 
                     Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
                 }
-                if (kState.IsKeyDown(leftKey) && left == false)                     //lets you move left when there is no tile
+                if (gState.ThumbSticks.Left.X <= -.5 && left == false)                     //lets you move left when there is no tile
                 {
                     right = false; timePerFrame = 40;                               //increases speed of run animation
 
                     Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
                 }
-                if (kState.IsKeyDown(upKey) && top == false && jumpPress == false)  //jumps and checks for object above
+                if (gState.IsButtonDown(Buttons.A) && top == false && jumpPress == false)  //jumps and checks for object above
                 {
                     top = true;             
                     bottom = false;
@@ -390,9 +390,9 @@ namespace Huntr
 
                     gravEffect = 5;                                                 //this grav effect throws the player up
                 }
-                else if (!kState.IsKeyDown(upKey)) jumpPress = false;               //resets jump ability if not pressed
+                else if (gState.IsButtonUp(Buttons.A)) jumpPress = false;               //resets jump ability if not pressed
 
-                if (kState.IsKeyDown(fireKey) && firePress == false)                //single kunai throw
+                if (gState.IsButtonDown(Buttons.X) && firePress == false)                //single kunai throw
                 {
                     foreach (Shots s in shots)
                     {
@@ -404,7 +404,7 @@ namespace Huntr
                     }
                     firePress = true;               
                 }
-                else if (!kState.IsKeyDown(fireKey) && firePress == true) firePress = false;    //resets throw ability
+                else if (gState.IsButtonUp(Buttons.X) && firePress == true) firePress = false;    //resets throw ability
             }
 
             Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y }; //updates rectangle

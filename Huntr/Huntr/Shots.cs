@@ -43,7 +43,7 @@ namespace Huntr //Filled and completed by Zane Draper
             count = 0;
             origin = new Vector2();
         }
-        public override void Update(KeyboardState kState) //unneccesary function. need to rebuild the hierarchy
+        public override void Update(KeyboardState kState, GamePadState gState) //unneccesary function. need to rebuild the hierarchy
         {
             throw new NotImplementedException();
         }
@@ -69,7 +69,7 @@ namespace Huntr //Filled and completed by Zane Draper
                 count = 0;
             }
 
-            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y }; //keep the rectangle the same, because of such a small change in area
+            Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y - 10, Width = Size.X, Height = Size.Y }; //keep the rectangle the same, because of such a small change in area
             origin = new Vector2(Size.X / 2, Size.Y / 2);
         }
 
@@ -83,7 +83,7 @@ namespace Huntr //Filled and completed by Zane Draper
             Rect = new Rectangle { X = (int)Position.X, Y = (int)Position.Y, Width = Size.X, Height = Size.Y };     //updates rectangle to new location
         }
 
-        public override void UpdateImg(GameTime gameTime, KeyboardState kState)
+        public override void UpdateImg(GameTime gameTime, KeyboardState kState, GamePadState gState)
         {
             throw new NotImplementedException();
         }

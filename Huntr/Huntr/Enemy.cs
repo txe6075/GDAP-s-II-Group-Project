@@ -28,12 +28,12 @@ namespace Huntr
 
         }
 
-        public override void Update(KeyboardState kState)
+        public override void Update(KeyboardState kState, GamePadState gState)
         {
             //whenever the enemy will be implemented
         }
 
-        public override void UpdateImg(GameTime gameTime, KeyboardState kState)
+        public override void UpdateImg(GameTime gameTime, KeyboardState kState, GamePadState gState)
         {
             throw new NotImplementedException();
         }

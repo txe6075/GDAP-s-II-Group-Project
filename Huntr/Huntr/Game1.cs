@@ -171,12 +171,12 @@ namespace Huntr
             {
                 kState = Keyboard.GetState(); //registers button pushes
 
-                p1.Update(kState); // update players
-                p2.Update(kState);
+                p1.Update(kState, GamePad.GetState(PlayerIndex.One)); // update players
+                p2.Update(kState, GamePad.GetState(PlayerIndex.Two));
 
                 // update character images for animation
-                p1.UpdateImg(gameTime, kState);
-                p2.UpdateImg(gameTime, kState);
+                p1.UpdateImg(gameTime, kState, GamePad.GetState(PlayerIndex.One));
+                p2.UpdateImg(gameTime, kState, GamePad.GetState(PlayerIndex.Two));
 
                 base.Update(gameTime);
             }
