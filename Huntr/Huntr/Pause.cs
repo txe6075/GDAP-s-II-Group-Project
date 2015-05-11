@@ -55,7 +55,7 @@ namespace Huntr
             option = opt;
             while (true)
             {
-                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.BigButton)) //detect when the start key is pressed on the controller
+                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A)) //detect when the start key is pressed on the controller
                 {
                     enterPressed = true;
                     switch (option)

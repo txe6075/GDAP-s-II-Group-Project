@@ -60,7 +60,7 @@ namespace Huntr
             option = opt;
             while (true)
             {
-                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start)) //detect when the enter key is pressed
+                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A)) //detect when the enter key is pressed
                 {
                     enterPressed = true;
                     switch (option)

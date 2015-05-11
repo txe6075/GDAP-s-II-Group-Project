@@ -119,7 +119,7 @@ namespace Huntr
 
 
         // enumeration
-        enum CharState { runLeft, runRight, faceForward, jump, dead, slide}
+        enum CharState { runLeft, runRight, faceForward, jump, dead, slide, melee}
         CharState charState = CharState.faceForward;
 
 
@@ -227,6 +227,11 @@ namespace Huntr
                 {
                     charState = CharState.slide;
                 }
+                // melee attacks
+                else if (gState.IsButtonDown(Buttons.Y))
+                {
+                    charState = CharState.melee;
+                }
                 
                 // character is not moving
                 if (gState.ThumbSticks.Left.X < .5 && gState.ThumbSticks.Left.X > -.5 && gState.IsButtonUp(Buttons.A))
@@ -248,6 +253,9 @@ namespace Huntr
                         break;
                     case CharState.slide:
                         charState = CharState.slide;
+                        break;
+                    case CharState.melee:
+                        charState = CharState.melee;
                         break;
                     default:
                         charState = CharState.faceForward;
@@ -311,6 +319,12 @@ namespace Huntr
                     {
                         charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
                     }
+                }
+
+                // character is melee attacking
+                if (charState == CharState.melee)
+                {
+
                 }
 
                 // character is not moving
