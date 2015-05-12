@@ -164,7 +164,7 @@ namespace Huntr
         protected override void Update(GameTime gameTime)
         {
             // both player one and two can exit the game
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two) .Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // both player one and two can pause and unpause the game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two).Buttons.Start == ButtonState.Pressed)
@@ -204,8 +204,6 @@ namespace Huntr
             switch (state)
             {
                 case gameState.MainMenu://if the correct menu selection is selected and enter is pressed, switch to the correct game state
-                    //menu.CheckGameState(state);
-                    //state = (gameState) menu.Navigate(state);
 
                     //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
                     menu.Draw(gameTime, spriteBatch);
@@ -255,9 +253,8 @@ namespace Huntr
                                     break;
                                 case 1: state = gameState.MainMenu;
                                     menu.CheckPress = false;
-                                    option = 1;
-                                    Thread.Sleep(100);
-                                    
+                                    option = 0;
+                                    Thread.Sleep(400);
                                     break;
                                 case 2: state = gameState.Exit;
                                     break;
@@ -269,7 +266,6 @@ namespace Huntr
                 case gameState.Achievements:
                     achieve.Draw(gameTime, spriteBatch);
                     break;
-
             }
 
             spriteBatch.End();
