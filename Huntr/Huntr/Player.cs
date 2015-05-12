@@ -119,7 +119,7 @@ namespace Huntr
 
 
         // enumeration
-        enum CharState { runLeft, runRight, faceForward, jump, dead, slide, melee}
+        enum CharState { runLeft, runRight, faceForward, jump, dead}
         CharState charState = CharState.faceForward;
 
 
@@ -222,44 +222,10 @@ namespace Huntr
                 {
                     charState = CharState.jump;
                 }
-                // character is sliding
-                else if (gState.IsButtonDown(Buttons.B))
-                {
-                    charState = CharState.slide;
-                }
-                // melee attacks
-                else if (gState.IsButtonDown(Buttons.Y))
-                {
-                    charState = CharState.melee;
-                }
-                
                 // character is not moving
-                if (gState.ThumbSticks.Left.X < .5 && gState.ThumbSticks.Left.X > -.5 && gState.IsButtonUp(Buttons.A))
+                else if (gState.ThumbSticks.Left.X < .5 && gState.ThumbSticks.Left.X > -.5 && gState.IsButtonUp(Buttons.A))
                 {
                     charState = CharState.faceForward;
-                }
-
-                // finite state machine code
-                switch (charState)
-                {
-                    case CharState.jump:
-                        charState = CharState.jump;
-                        break;
-                    case CharState.runLeft:
-                        charState = CharState.runLeft;
-                        break;
-                    case CharState.runRight:
-                        charState = CharState.runRight;
-                        break;
-                    case CharState.slide:
-                        charState = CharState.slide;
-                        break;
-                    case CharState.melee:
-                        charState = CharState.melee;
-                        break;
-                    default:
-                        charState = CharState.faceForward;
-                        break;
                 }
 
                 // character is running left
@@ -296,35 +262,6 @@ namespace Huntr
                 else if (charState == CharState.jump)
                 {
                     charRect = new Rectangle(0 + frame * Variables.JUMP_WIDTH, Variables.JUMPING_Y, Variables.JUMP_WIDTH, Variables.JUMP_HEIGHT);
-                }
-
-                // character is sliding left
-                if (charState == CharState.slide && gState.ThumbSticks.Left.X <= -.5)
-                {
-                    charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
-                    direction = 1;
-                    effect = SpriteEffects.FlipHorizontally;
-                    if (frame > 9) // keeps character from sliding forever
-                    {
-                        charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
-                    }
-                }
-                // character is sliding right
-                else if (charState == CharState.slide && gState.ThumbSticks.Left.X >= .5)
-                {
-                    charRect = new Rectangle(Variables.SLIDING_X + frame * Variables.SLIDE_WIDTH, Variables.SLIDING_Y, Variables.SLIDE_WIDTH, Variables.SLIDE_HEIGHT);
-                    direction = 2;
-                    effect = SpriteEffects.None;
-                    if (frame > 9) // keeps character from sliding forever
-                    {
-                        charRect = new Rectangle(0 + frame * Variables.STAND_WIDTH, Variables.STANDING_Y, Variables.STAND_WIDTH, Variables.STAND_HEIGHT);
-                    }
-                }
-
-                // character is melee attacking
-                if (charState == CharState.melee)
-                {
-
                 }
 
                 // character is not moving
