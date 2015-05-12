@@ -87,7 +87,7 @@ namespace Huntr
                         option--; //decreases option by 1
                     }
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(200);
                     
                 }
                 else if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y <= -.5)
@@ -101,7 +101,7 @@ namespace Huntr
                     {
                         option++; //increases option by 1
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(200);
                 }
                 
                 Draw(gameTime, spriteBatch);

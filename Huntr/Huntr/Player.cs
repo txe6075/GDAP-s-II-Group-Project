@@ -389,7 +389,10 @@ namespace Huntr
             {
                 if (s.Alive == true)
                 {
-                    s.Update();                                     //updates position and rotation before draw
+                    if (Variables.isPaused == false)
+                    {
+                        s.Update(); //updates position and rotation before draw
+                    }
                     s.Draw(gameTime, spriteBatch);
                 }
             }
