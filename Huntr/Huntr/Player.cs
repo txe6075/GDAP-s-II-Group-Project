@@ -64,6 +64,7 @@ namespace Huntr
         private int playerSpeed;
         private int gravEffectVar;
         private int powerup;
+        private int ccCount;
 
         //animation
         private int frame;
@@ -184,6 +185,7 @@ namespace Huntr
             playerSpeed = Variables.playerSpeed;
             gravEffectVar = 5;
             powerup = 5;
+            ccCount = 10;
         }
 
         // updates the player image depending on key presses
@@ -306,11 +308,12 @@ namespace Huntr
             }
 
             //character flashes red when damaged
-            if (charColor == Color.Red) colorCount++;
-            if (charColor == Color.Red && colorCount >= 10)
+            if (charColor != Color.White) colorCount++;
+            if (charColor != Color.White && colorCount >= ccCount)
             {
                 charColor = Color.White;
                 colorCount = 0;
+                ccCount = 10;
             }
         }
 
@@ -322,6 +325,7 @@ namespace Huntr
             if (health <= 0) //dead  player with null controls
             {
                 charState = CharState.dead;
+                if (health < 0) health = 0;
             }
             else
             {
@@ -431,11 +435,15 @@ namespace Huntr
             {
                 playerSpeed += 1;
                 powerup = 10;
+                charColor = Color.Gold;
+                ccCount = 100;
             }
             else if (KillCount == 10)
             {
                 gravEffectVar += 2;
                 powerup = 100;
+                charColor = Color.Gold;
+                ccCount = 100;
             }
         }
     }

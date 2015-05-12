@@ -42,6 +42,8 @@ namespace Huntr
         Texture2D player2Sprite; // sprite for second player object
         Texture2D heart;
         Texture2D kunai;
+        Texture2D speed;
+        Texture2D jump;
         SpriteFont font;
 
         //Unique classes
@@ -110,9 +112,11 @@ namespace Huntr
             environment2 = Content.Load<Texture2D>("tile2"); 
             environment3 = Content.Load<Texture2D>("tile3");
             environment4 = Content.Load<Texture2D>("tile4"); 
-            kunai = Content.Load<Texture2D>("Kunai"); 
+            kunai = Content.Load<Texture2D>("Kunai");
             playerSprite = Content.Load<Texture2D>("sheet"); //loads the character sheets
             player2Sprite = Content.Load<Texture2D>("redChar");
+            speed = Content.Load<Texture2D>("speed");
+            jump = Content.Load<Texture2D>("jump");
 
             //fonts
             font = Content.Load<SpriteFont>("font1");
@@ -381,6 +385,22 @@ namespace Huntr
             spriteBatch.DrawString(font, "SCORE:", new Vector2(Variables.screenWidth - 48, 50), Color.White, 0, Vector2.Zero, .6f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font, "" + p2.KillCount, new Vector2(Variables.screenWidth - 43, 60), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
+            if (p1.KillCount >= 5)
+            {
+                spriteBatch.Draw(speed, new Rectangle(48, 0, 48, 48), Color.White);
+                if (p1.KillCount >= 10)
+                {
+                    spriteBatch.Draw(jump, new Rectangle(96, 0, 48, 48), Color.White);
+                }
+            }
+            if (p2.KillCount >= 5)
+            {
+                spriteBatch.Draw(speed, new Rectangle(Variables.screenWidth - 96, 0, 48, 48), Color.White);
+                if (p2.KillCount >= 10)
+                {
+                    spriteBatch.Draw(jump, new Rectangle(Variables.screenWidth - 144, 0, 48, 48), Color.White);
+                }
+            }
         }
     }
 }
