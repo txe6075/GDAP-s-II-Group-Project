@@ -61,6 +61,10 @@ namespace Huntr
         private int killCount;
         Rectangle charRect;
 
+        private int playerSpeed;
+        private int gravEffectVar;
+        private int powerup;
+
         //animation
         private int frame;
         private int framesElapsed;
@@ -175,6 +179,11 @@ namespace Huntr
 
 
             charRect = new Rectangle(0, 463, 60, 128);
+
+            
+            playerSpeed = Variables.playerSpeed;
+            gravEffectVar = 5;
+            powerup = 5;
         }
 
         // updates the player image depending on key presses
@@ -308,8 +317,9 @@ namespace Huntr
         public override void Update(KeyboardState kState, GamePadState gState)
         {
             Gravity();//Gravity happens first
+            if (killCount == powerup) Upgrade();
 
-            if (health == 0) //dead  player with null controls
+            if (health <= 0) //dead  player with null controls
             {
                 charState = CharState.dead;
             }
@@ -321,13 +331,13 @@ namespace Huntr
                 {
                     left = false; timePerFrame = 40;                                //increases the speed of run animation
 
-                    Position = new Vector2(Position.X + Variables.playerSpeed, Position.Y);
+                    Position = new Vector2(Position.X + playerSpeed, Position.Y);
                 }
                 if (gState.ThumbSticks.Left.X <= -.5 && left == false)                     //lets you move left when there is no tile
                 {
                     right = false; timePerFrame = 40;                               //increases speed of run animation
 
-                    Position = new Vector2(Position.X - Variables.playerSpeed, Position.Y);
+                    Position = new Vector2(Position.X - playerSpeed, Position.Y);
                 }
                 if (gState.IsButtonDown(Buttons.A) && top == false && jumpPress == false)  //jumps and checks for object above
                 {
@@ -339,7 +349,7 @@ namespace Huntr
 
                     Position = new Vector2(Position.X, Position.Y - 10);
 
-                    gravEffect = 5;                                                 //this grav effect throws the player up
+                    gravEffect = gravEffectVar;                                                 //this grav effect throws the player up
                 }
                 else if (gState.IsButtonUp(Buttons.A)) jumpPress = false;               //resets jump ability if not pressed
 
@@ -413,6 +423,20 @@ namespace Huntr
             bottom = false;
             left = false;
             right = false;
+        }
+
+        public void Upgrade()
+        {
+            if (killCount == 5)
+            {
+                playerSpeed += 1;
+                powerup = 10;
+            }
+            else if (KillCount == 10)
+            {
+                gravEffectVar += 2;
+                powerup = 100;
+            }
         }
     }
 }
