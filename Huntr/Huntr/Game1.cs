@@ -139,7 +139,7 @@ namespace Huntr
 
 
             //Menu object
-            menuSprite = Content.Load<Texture2D>("Menu2");
+            menuSprite = Content.Load<Texture2D>("Menu3");
             button1Sprite = Content.Load<Texture2D>("Multiplayer Button");
             button2Sprite = Content.Load<Texture2D>("Achievement Button");
             button3Sprite = Content.Load<Texture2D>("Exit Game Button");
