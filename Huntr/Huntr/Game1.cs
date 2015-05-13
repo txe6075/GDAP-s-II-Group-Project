@@ -298,7 +298,7 @@ namespace Huntr
                         {
                             string winner = "";
 
-                            if (p1.KillCount >= 1) winner = "Player 1 is Ninja Supreme!";
+                            if (p1.KillCount >= 15) winner = "Player 1 is Ninja Supreme!";
                             else if (p2.KillCount >= 15) winner = "Player 2 is Ninja Supreme!";
 
                             spriteBatch.DrawString(font, winner, new Vector2(Variables.screenWidth / 2 - 300, Variables.screenHeight / 2 - 50), Color.Black, 0, Vector2.Zero, 3f, SpriteEffects.None, 0);
@@ -469,7 +469,7 @@ namespace Huntr
 
         public void WinCondition()
         {
-            if (p1.KillCount >= 1 || p2.KillCount >= 15)
+            if (p1.KillCount >= 15 || p2.KillCount >= 15)
             {
                 Variables.gameOver = true;
                 Variables.isPaused = true;
