@@ -46,5 +46,10 @@ namespace Huntr
 
         //Pause variables
         public static Boolean isPaused = false;
+
+        //Achievements Variables
+        public const string FILENAME = "Achievements.txt";
+        public static int gamesPlayed = 0;
+        public const string GAMESFILENAME = "GamesPlayed.txt";
     }
 }

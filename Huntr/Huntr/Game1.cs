@@ -64,6 +64,16 @@ namespace Huntr
         //Achievement Screen attributes
         Texture2D achieveScreenSprite;
         Achievements achieve;
+        Texture2D ach1;
+        Texture2D ach2;
+        Texture2D ach3;
+        Texture2D ach4;
+        Texture2D ach5;
+        Texture2D ach6;
+        Texture2D ach7;
+        Texture2D ach8;
+        Texture2D ach9;
+        Texture2D shadowSprite;
 
         //Pause Screen Attributes
         Texture2D pauseSprite;
@@ -137,7 +147,18 @@ namespace Huntr
 
             //Achievement Stuff
             achieveScreenSprite = Content.Load<Texture2D>("Achievement Screen");
-            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0));
+            ach1 = Content.Load<Texture2D>("AchSprite1");
+            ach2 = Content.Load<Texture2D>("AchSprite2");
+            ach3 = Content.Load<Texture2D>("AchSprite3");
+            ach4 = Content.Load<Texture2D>("AchSprite4");
+            ach5 = Content.Load<Texture2D>("AchSprite5");
+            ach6 = Content.Load<Texture2D>("AchSprite6");
+            ach7 = Content.Load<Texture2D>("AchSprite7");
+            //     ach8 = Content.Load<Texture2D>("AchSprite8");
+            //     ach9 = Content.Load<Texture2D>("AchSprite9");
+            shadowSprite = Content.Load<Texture2D>("Shadow Sprite");
+            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0), shadowSprite, ach1, new Vector2(200, 400), ach2, ach3, ach4, ach5, ach6);
+
 
             //Pause 
             pauseSprite = Content.Load<Texture2D>("Paused Screen");
@@ -265,6 +286,7 @@ namespace Huntr
                     break;
                 case gameState.Achievements:
                     achieve.Draw(gameTime, spriteBatch);
+                    achieve.CheckAchievements(gameTime, spriteBatch);
                     break;
             }
 
