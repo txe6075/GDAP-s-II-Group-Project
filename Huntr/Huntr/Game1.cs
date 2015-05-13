@@ -318,6 +318,7 @@ namespace Huntr
                             p2.CharColor = Color.Red;                   //turns hit player red for a sec
                             p2.Health -= 1;                             //decreases their health
                             if (p2.Health == 0) p1.KillCount += 1;      //if you kill them it increases your kill count
+                            if (p2.Health <= 0) p2.Health = 0;
                         }
                     }
                 }
@@ -333,6 +334,7 @@ namespace Huntr
                             p1.CharColor = Color.Red;
                             p1.Health -= 1;
                             if (p1.Health == 0) p2.KillCount += 1;
+                            if (p1.Health <= 0) p1.Health = 0;
                         }
                     }
                 }

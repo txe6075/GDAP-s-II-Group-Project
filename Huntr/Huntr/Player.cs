@@ -325,7 +325,6 @@ namespace Huntr
             if (health <= 0) //dead  player with null controls
             {
                 charState = CharState.dead;
-                if (health < 0) health = 0;
             }
             else
             {
