@@ -287,6 +287,7 @@ namespace Huntr
                                         menu.CheckPress = false;
                                         option = 0;
                                         Thread.Sleep(400);
+                                        Variables.gamesQuit++;
                                         achieve.WriteAchievements();
                                         break;
                                     case 2: state = gameState.Exit;
@@ -307,10 +308,12 @@ namespace Huntr
 
                             //Add to the number of games played
                             Variables.gamesPlayed++;
+                            achieve.CheckPerfectGame(p1.KillCount, p2.KillCount, p1.Health, p2.Health);
 
                             if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.X))
                             {
                                 Variables.gamesQuit++;
+                                
                                 achieve.CheckAchievements(gameTime, spriteBatch);
                                 achieve.WriteAchievements();
                                 Exit();

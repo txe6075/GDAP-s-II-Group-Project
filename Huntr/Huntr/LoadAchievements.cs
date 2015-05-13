@@ -30,17 +30,21 @@ namespace Huntr
                     //stores the phrases
                     int.TryParse(line, out lineInt);
                     achieves[i] = lineInt;
+                    Console.WriteLine("Achieves[" + i + "]: " + achieves[i]); //Debug stuff
+                    i++;
                 }
+                Console.WriteLine("i at the end: " + i);
                 //close the file if you openned it
+                Variables.achieves = achieves;
                 reader.Close();
                 Variables.achieves = achieves;
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException fnf)
             {
                 //The file might not exist, create it
                 try
                 {
-                    //FileStream newFile = File.Create("Achievements.txt");
+                    //FileStream newFile = File.Create("AchievementsDebug.txt");
                     WriteAchievements(achieves);
                     StreamReader reader = new StreamReader("Achievements.txt");
 
@@ -63,10 +67,11 @@ namespace Huntr
                     //return a null
                     Variables.achieves = achieves;
                 }
-
+                Console.WriteLine("FILE WASN'T FOUND: " + fnf.Message); //Debug stuff
             }
-            catch(IOException)
+            catch(IOException ioe)
             {
+                Console.WriteLine("DIFFERENT IOEXCEPTION OR FILE NOT FOUND AGAIN: " + ioe.Message); //Debug
                 Variables.achieves = null;
             }
             //return null;
@@ -83,10 +88,18 @@ namespace Huntr
                     update.WriteLine(achieves[i]);
 
                 }
+                if(achieves == null)
+                {
+                    for(int i = 0; i<10; i++)
+                    {
+                        update.WriteLine(0);
+                    }
+                }
+                update.Close();
             }
-            catch(IOException)
+            catch(IOException ioe)
             {
-
+                Console.WriteLine("IOE Exception: " + ioe.Message);
             }
         }
         public void WriteGamesPlayed()
@@ -95,17 +108,20 @@ namespace Huntr
             {
                 StreamWriter update = new StreamWriter("GamesPlayed.txt");
                 update.WriteLine(Variables.gamesPlayed);
+                update.Close();
             }
-            catch(IOException)
+            catch(IOException ioe)
             {
                 try
                 {
                     StreamWriter update = new StreamWriter("GamesPlayed.txt");
                     update.WriteLine(Variables.gamesPlayed);
+                    Console.WriteLine("IO Exception" + ioe.Message);
+                    update.Close();
                 }
-                catch (IOException)
+                catch (IOException ioe2)
                 {
-
+                    Console.WriteLine("2nd IO EXCEPTION: " + ioe2.Message);
                 }
             }
         }
@@ -114,8 +130,9 @@ namespace Huntr
             try
             {
                 StreamWriter update = new StreamWriter("GamesExited.txt");
-                Variables.gamesQuit++;
+                //Variables.gamesQuit++;
                 update.WriteLine(Variables.gamesQuit);
+                update.Close();
             }
             catch(IOException)
             {
@@ -123,6 +140,7 @@ namespace Huntr
                 {
                     StreamWriter update = new StreamWriter("GamesExited.txt");
                     update.WriteLine(Variables.gamesQuit);
+                    update.Close();
                 }
                 catch(IOException)
                 {
@@ -145,7 +163,7 @@ namespace Huntr
                     int.TryParse(line, out lineInt);
                     Variables.gamesPlayed = lineInt;
                 }
-
+                reader.Close();
             }
             catch (IOException)
             {
@@ -161,7 +179,7 @@ namespace Huntr
                         int.TryParse(line, out lineInt);
                         Variables.gamesPlayed = lineInt;
                     }
-
+                    reader.Close();
                 }
                 catch (IOException)
                 {
@@ -185,10 +203,11 @@ namespace Huntr
                     int.TryParse(line, out lineInt);
                     Variables.gamesPlayed = lineInt;
                 }
-
+                reader.Close();
             }
             catch (IOException)
             {
+                Console.WriteLine("ERROR READING FILE");
                 try
                 {
                     StreamReader reader = new StreamReader(filename);
@@ -200,7 +219,7 @@ namespace Huntr
                         int.TryParse(line, out lineInt);
                         Variables.gamesQuit = lineInt;
                     }
-
+                    reader.Close();
                 }
                 catch (IOException)
                 {

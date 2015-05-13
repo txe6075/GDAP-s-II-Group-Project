@@ -363,6 +363,8 @@ namespace Huntr
                         if (s.Alive == false)                                       //finds first unactive kunai
                         {
                             s.Set(new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 3), direction);
+                            Variables.thrownKunai++; //increase thrown kunai by one
+                            Console.WriteLine("ThrownKunai: " + Variables.thrownKunai);
                             break;
                         }
                     }
