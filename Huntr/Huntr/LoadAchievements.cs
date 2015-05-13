@@ -14,7 +14,7 @@ namespace Huntr
 
 
 
-        public int[] Load(string filename)
+        public void Load(string filename)
         {
             try
             {
@@ -33,15 +33,15 @@ namespace Huntr
                 }
                 //close the file if you openned it
                 reader.Close();
-                return achieves;
+                Variables.achieves = achieves;
             }
-            catch (IOException)
+            catch (FileNotFoundException)
             {
                 //The file might not exist, create it
                 try
                 {
-                    FileStream newFile = File.Create("Achievements.txt");
-
+                    //FileStream newFile = File.Create("Achievements.txt");
+                    WriteAchievements(achieves);
                     StreamReader reader = new StreamReader("Achievements.txt");
 
                     //reads the phrases
@@ -56,16 +56,79 @@ namespace Huntr
                     }
                     //close the file if you openned it
                     reader.Close();
-                    return achieves;
+                    Variables.achieves = achieves;
                 }
                 catch (IOException)
                 {
                     //return a null
-                    return achieves;
+                    Variables.achieves = achieves;
                 }
 
             }
+            catch(IOException)
+            {
+                Variables.achieves = null;
+            }
             //return null;
+        }
+
+        public void WriteAchievements(int[] achieves)
+        {
+            try
+            {
+                StreamWriter update = new StreamWriter("Achievements.txt");
+
+                for (int i = 0; i < achieves.Count(); i++ )
+                {
+                    update.WriteLine(achieves[i]);
+
+                }
+            }
+            catch(IOException)
+            {
+
+            }
+        }
+        public void WriteGamesPlayed()
+        {
+            try
+            {
+                StreamWriter update = new StreamWriter("GamesPlayed.txt");
+                update.WriteLine(Variables.gamesPlayed);
+            }
+            catch(IOException)
+            {
+                try
+                {
+                    StreamWriter update = new StreamWriter("GamesPlayed.txt");
+                    update.WriteLine(Variables.gamesPlayed);
+                }
+                catch (IOException)
+                {
+
+                }
+            }
+        }
+        public void WriteExitGame()
+        {
+            try
+            {
+                StreamWriter update = new StreamWriter("GamesExited.txt");
+                Variables.gamesQuit++;
+                update.WriteLine(Variables.gamesQuit);
+            }
+            catch(IOException)
+            {
+                try
+                {
+                    StreamWriter update = new StreamWriter("GamesExited.txt");
+                    update.WriteLine(Variables.gamesQuit);
+                }
+                catch(IOException)
+                {
+
+                }
+            }
         }
 
         //check number of games
@@ -107,6 +170,45 @@ namespace Huntr
             }
 
             return Variables.gamesPlayed;
+        }
+
+        public int CheckQuits(string filename)
+        {
+            try
+            {
+                StreamReader reader = new StreamReader(filename);
+                string line;
+                int lineInt;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    //stores the phrases
+                    int.TryParse(line, out lineInt);
+                    Variables.gamesPlayed = lineInt;
+                }
+
+            }
+            catch (IOException)
+            {
+                try
+                {
+                    StreamReader reader = new StreamReader(filename);
+                    string line;
+                    int lineInt;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        //stores the phrases
+                        int.TryParse(line, out lineInt);
+                        Variables.gamesQuit = lineInt;
+                    }
+
+                }
+                catch (IOException)
+                {
+                    return Variables.gamesQuit;
+                }
+            }
+
+            return Variables.gamesQuit;
         }
     }
 }

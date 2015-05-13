@@ -51,6 +51,9 @@ namespace Huntr
         //Achievements Variables
         public const string FILENAME = "Achievements.txt";
         public static int gamesPlayed = 0;
+        public static int thrownKunai = 0;
         public const string GAMESFILENAME = "GamesPlayed.txt";
+        public static int gamesQuit = 0;
+        public static int[] achieves;
     }
 }

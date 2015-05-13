@@ -154,10 +154,10 @@ namespace Huntr
             ach5 = Content.Load<Texture2D>("AchSprite5");
             ach6 = Content.Load<Texture2D>("AchSprite6");
             ach7 = Content.Load<Texture2D>("AchSprite7");
-            //     ach8 = Content.Load<Texture2D>("AchSprite8");
+            ach8 = Content.Load<Texture2D>("AchSprite8");
             //     ach9 = Content.Load<Texture2D>("AchSprite9");
             shadowSprite = Content.Load<Texture2D>("Shadow Sprite");
-            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0), shadowSprite, ach1, new Vector2(200, 400), ach2, ach3, ach4, ach5, ach6);
+            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0), kunai, shadowSprite, ach1, new Vector2(200, 400), ach2, ach3, ach4, ach5, ach6, ach7, ach8);
 
 
             //Pause 
@@ -186,7 +186,11 @@ namespace Huntr
         {
             // both player one and two can exit the game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                Variables.gamesQuit++;
+                achieve.CheckAchievements(gameTime, spriteBatch);
                 Exit();
+            }
             // both player one and two can pause and unpause the game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two).Buttons.Start == ButtonState.Pressed)
             {
@@ -249,6 +253,9 @@ namespace Huntr
                     break;
 
                 case gameState.Exit:
+                    Variables.gamesQuit++;
+                    achieve.CheckAchievements(gameTime, spriteBatch);
+                    achieve.WriteAchievements();
                     Exit();
                     break;
                 case gameState.Multiplayer:
@@ -280,6 +287,7 @@ namespace Huntr
                                         menu.CheckPress = false;
                                         option = 0;
                                         Thread.Sleep(400);
+                                        achieve.WriteAchievements();
                                         break;
                                     case 2: state = gameState.Exit;
                                         break;
@@ -297,8 +305,14 @@ namespace Huntr
 
                             spriteBatch.DrawString(font, "To exit, press X", new Vector2(Variables.screenWidth / 2 - 100, Variables.screenHeight / 2 + 50), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
+                            //Add to the number of games played
+                            Variables.gamesPlayed++;
+
                             if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.X))
                             {
+                                Variables.gamesQuit++;
+                                achieve.CheckAchievements(gameTime, spriteBatch);
+                                achieve.WriteAchievements();
                                 Exit();
                             }
                         }
@@ -307,6 +321,14 @@ namespace Huntr
 
                     break;
                 case gameState.Achievements:
+                    if(GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.B))
+                    {
+                        state = gameState.MainMenu;
+                    }
+                    achieve.WriteAchievements();
+                    spriteBatch.DrawString(font, "B: To Mainmenu", new Vector2(Variables.screenWidth / 2 - 100, Variables.screenHeight / 2 + 50), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    menu.CheckPress = false;
+                    option = 0;
                     achieve.Draw(gameTime, spriteBatch);
                     achieve.CheckAchievements(gameTime, spriteBatch);
                     break;
