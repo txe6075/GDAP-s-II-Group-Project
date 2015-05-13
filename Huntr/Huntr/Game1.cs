@@ -216,6 +216,8 @@ namespace Huntr
         {
             Update(gameTime);
 
+            WinCondition();
+
             Collision(); //All collision is registered before drawing
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -261,26 +263,46 @@ namespace Huntr
                     //Draw the pause menu and enable navigation
                     if(Variables.isPaused)
                     {
-                        //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
-                        pause.Draw(gameTime, spriteBatch);
-                        //menu.DrawButtons(gameTime, spriteBatch, option);
-                        option = pause.Navigate(gameTime, spriteBatch, option);
-                        if (pause.CheckPress == true)
+                        if (!Variables.gameOver)
                         {
-                            switch (option)
+                            //This is what keeps track of the highlighted menu option (0,1,2,3 are acceptable values)
+                            pause.Draw(gameTime, spriteBatch);
+                            //menu.DrawButtons(gameTime, spriteBatch, option);
+                            option = pause.Navigate(gameTime, spriteBatch, option);
+                            if (pause.CheckPress == true)
                             {
-                                case 0: Variables.isPaused = false;
-                                    pause.CheckPress = false;
-                                    break;
-                                case 1: state = gameState.MainMenu;
-                                    menu.CheckPress = false;
-                                    option = 0;
-                                    Thread.Sleep(400);
-                                    break;
-                                case 2: state = gameState.Exit;
-                                    break;
+                                switch (option)
+                                {
+                                    case 0: Variables.isPaused = false;
+                                        pause.CheckPress = false;
+                                        break;
+                                    case 1: state = gameState.MainMenu;
+                                        menu.CheckPress = false;
+                                        option = 0;
+                                        Thread.Sleep(400);
+                                        break;
+                                    case 2: state = gameState.Exit;
+                                        break;
+                                }
                             }
                         }
+                        else
+                        {
+                            string winner = "";
+
+                            if (p1.KillCount >= 1) winner = "Player 1 is Ninja Supreme!";
+                            else if (p2.KillCount >= 15) winner = "Player 2 is Ninja Supreme!";
+
+                            spriteBatch.DrawString(font, winner, new Vector2(Variables.screenWidth / 2 - 300, Variables.screenHeight / 2 - 50), Color.Black, 0, Vector2.Zero, 3f, SpriteEffects.None, 0);
+
+                            spriteBatch.DrawString(font, "To exit, press X", new Vector2(Variables.screenWidth / 2 - 100, Variables.screenHeight / 2 + 50), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+
+                            if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.X))
+                            {
+                                Exit();
+                            }
+                        }
+
                     }
 
                     break;
@@ -350,7 +372,7 @@ namespace Huntr
                     if (s.Alive == true)
                     {
                         if (s.Rect.Intersects(n.Rect)) s.Alive = false;
-                        if (s.Rect.Intersects(p1.Rect) && p2.Health > 0) 
+                        if (s.Rect.Intersects(p1.Rect) && p1.Health > 0) 
                         {
                             s.Alive = false;
                             p1.CharColor = Color.Red;
@@ -420,6 +442,15 @@ namespace Huntr
                 {
                     spriteBatch.Draw(jump, new Rectangle(Variables.screenWidth - 144, 0, 48, 48), Color.White);
                 }
+            }
+        }
+
+        public void WinCondition()
+        {
+            if (p1.KillCount >= 1 || p2.KillCount >= 15)
+            {
+                Variables.gameOver = true;
+                Variables.isPaused = true;
             }
         }
     }

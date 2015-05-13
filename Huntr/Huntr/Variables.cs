@@ -46,6 +46,7 @@ namespace Huntr
 
         //Pause variables
         public static Boolean isPaused = false;
+        public static Boolean gameOver = false;
 
         //Achievements Variables
         public const string FILENAME = "Achievements.txt";
