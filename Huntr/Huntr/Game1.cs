@@ -273,7 +273,7 @@ namespace Huntr
                         {
                             string winner = "";
 
-                            if (p1.KillCount >= 1)
+                            if (p1.KillCount >= 15)
                                 spriteBatch.Draw(p1win, new Rectangle(Variables.screenWidth/2 - p1win.Width/2, Variables.screenHeight/2 - p1win.Height/2, 800, 300), Color.White);
                             else if (p2.KillCount >= 15)
                                 spriteBatch.Draw(p2win, new Rectangle(Variables.screenWidth / 2 - p1win.Width / 2, Variables.screenHeight / 2 - p1win.Height / 2, 800, 300), Color.White);
@@ -441,7 +441,7 @@ namespace Huntr
 
         public void WinCondition()
         {
-            if (p1.KillCount >= 1 || p2.KillCount >= 15)
+            if (p1.KillCount >= 15 || p2.KillCount >= 15)
             {
                 Variables.gameOver = true;
                 Variables.isPaused = true;
