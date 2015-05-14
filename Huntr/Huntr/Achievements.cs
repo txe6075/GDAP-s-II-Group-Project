@@ -295,7 +295,7 @@ namespace Huntr
                     0  // default layer
                     );
                 }
-                if (achieves[7] == 1 || Variables.thrownKunai >= 100)//lots of kunai thrown
+                if (achieves[7] == 1 || Variables.thrownKunai >= 2000)//lots of kunai thrown
                 {
                     achieves[7] = 1;
                     Variables.achieves[7] = 1;
@@ -330,8 +330,6 @@ namespace Huntr
                     SpriteEffects.None, // no effects
                     0  // default layer
                     );
-
-
                 }
                 if (achieves[8] == 1 || Variables.gamesQuit >= 1)//exit game once
                 {
