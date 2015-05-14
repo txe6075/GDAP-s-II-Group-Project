@@ -333,6 +333,7 @@ namespace Huntr
                     menu.CheckPress = false;
                     option = 0;
                     achieve.Draw(gameTime, spriteBatch);
+                    achieve.DrawAchievements(gameTime, spriteBatch);
                     achieve.CheckAchievements(gameTime, spriteBatch);
                     break;
             }

@@ -70,11 +70,55 @@ namespace Huntr
                     return;
                 }
 
-                //Check each of the nine numbers to see if it exists or if it is a 1
-                if (achieves[0] == 1 || Variables.gamesPlayed >= 1)//one game completed
+            }
+        }
+
+        public void DrawAchievements(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            load.Load(Variables.FILENAME);
+            achieves = Variables.achieves;
+            if(achieves == null)
+            {
+                return;
+            }
+            //Check each of the nine numbers to see if it exists or if it is a 1
+            if (achieves[0] == 1 || Variables.gamesPlayed >= 1)//one game completed
+            {
+                achieves[0] = 1;
+                Variables.achieves[0] = 1;
+                //draw the trophy & shadow
+                spriteBatch.Draw(
+                shadowSprite, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
+
+                spriteBatch.Draw(
+                ach1, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
+
+
+                //nest these ones because they have to unlock them in order
+                if (achieves[1] == 1 || Variables.gamesPlayed >= 5)//5 games completed
                 {
-                    achieves[0] = 1;
-                    Variables.achieves[0] = 1;
+                    achieves[1] = 1;
+                    Variables.achieves[1] = 1;
+                    ach1Pos.X = ach1Pos.X + 100;
+                    //draw the trophy
                     //draw the trophy & shadow
                     spriteBatch.Draw(
                     shadowSprite, // spritesheet
@@ -89,7 +133,7 @@ namespace Huntr
                     );
 
                     spriteBatch.Draw(
-                    ach1, // spritesheet
+                    ach2, // spritesheet
                     ach1Pos, // where to draw in window
                     new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
                     Color.White, // dont change image color
@@ -100,12 +144,10 @@ namespace Huntr
                     0  // default layer
                     );
 
-
-                    //nest these ones because they have to unlock them in order
-                    if (achieves[1] == 1 || Variables.gamesPlayed >= 5)//5 games completed
+                    if (achieves[2] == 1 || Variables.gamesPlayed >= 10)//10 games completed
                     {
-                        achieves[1] = 1;
-                        Variables.achieves[1] = 1;
+                        achieves[2] = 1;
+                        Variables.achieves[2] = 1;
                         ach1Pos.X = ach1Pos.X + 100;
                         //draw the trophy
                         //draw the trophy & shadow
@@ -122,7 +164,7 @@ namespace Huntr
                         );
 
                         spriteBatch.Draw(
-                        ach2, // spritesheet
+                        ach3, // spritesheet
                         ach1Pos, // where to draw in window
                         new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
                         Color.White, // dont change image color
@@ -132,11 +174,10 @@ namespace Huntr
                         SpriteEffects.None, // no effects
                         0  // default layer
                         );
-
-                        if (achieves[2] == 1 || Variables.gamesPlayed >= 10)//10 games completed
+                        if (achieves[3] == 1 || Variables.gamesPlayed >= 100)//100 games completed
                         {
-                            achieves[2] = 1;
-                            Variables.achieves[2] = 1;
+                            achieves[3] = 1;
+                            Variables.achieves[3] = 1;
                             ach1Pos.X = ach1Pos.X + 100;
                             //draw the trophy
                             //draw the trophy & shadow
@@ -153,7 +194,7 @@ namespace Huntr
                             );
 
                             spriteBatch.Draw(
-                            ach3, // spritesheet
+                            ach4, // spritesheet
                             ach1Pos, // where to draw in window
                             new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
                             Color.White, // dont change image color
@@ -163,10 +204,10 @@ namespace Huntr
                             SpriteEffects.None, // no effects
                             0  // default layer
                             );
-                            if (achieves[3] == 1 || Variables.gamesPlayed >= 100)//100 games completed
+                            if (achieves[4] == 1 || Variables.gamesPlayed >= 1337)//1337 games completed
                             {
-                                achieves[3] = 1;
-                                Variables.achieves[3] = 1;
+                                achieves[4] = 1;
+                                Variables.achieves[4] = 1;
                                 ach1Pos.X = ach1Pos.X + 100;
                                 //draw the trophy
                                 //draw the trophy & shadow
@@ -183,7 +224,7 @@ namespace Huntr
                                 );
 
                                 spriteBatch.Draw(
-                                ach4, // spritesheet
+                                ach5, // spritesheet
                                 ach1Pos, // where to draw in window
                                 new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
                                 Color.White, // dont change image color
@@ -193,10 +234,10 @@ namespace Huntr
                                 SpriteEffects.None, // no effects
                                 0  // default layer
                                 );
-                                if (achieves[4] == 1 || Variables.gamesPlayed >= 1337)//1337 games completed
+                                if (achieves[5] == 1 || Variables.gamesPlayed >= 10000)//10,000 games completed
                                 {
-                                    achieves[4] = 1;
-                                    Variables.achieves[4] = 1;
+                                    achieves[5] = 1;
+                                    Variables.achieves[5] = 1;
                                     ach1Pos.X = ach1Pos.X + 100;
                                     //draw the trophy
                                     //draw the trophy & shadow
@@ -213,7 +254,7 @@ namespace Huntr
                                     );
 
                                     spriteBatch.Draw(
-                                    ach5, // spritesheet
+                                    ach6, // spritesheet
                                     ach1Pos, // where to draw in window
                                     new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
                                     Color.White, // dont change image color
@@ -223,146 +264,115 @@ namespace Huntr
                                     SpriteEffects.None, // no effects
                                     0  // default layer
                                     );
-                                    if (achieves[5] == 1 || Variables.gamesPlayed >= 10000)//10,000 games completed
-                                    {
-                                        achieves[5] = 1;
-                                        Variables.achieves[5] = 1;
-                                        ach1Pos.X = ach1Pos.X + 100;
-                                        //draw the trophy
-                                        //draw the trophy & shadow
-                                        spriteBatch.Draw(
-                                        shadowSprite, // spritesheet
-                                        ach1Pos, // where to draw in window
-                                        new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                                        Color.White, // dont change image color
-                                        0, // don't rotate the image
-                                        Vector2.Zero, // rotation center (not used)
-                                        2.25f, // scaling factor - dont change image size
-                                        SpriteEffects.None, // no effects
-                                        0  // default layer
-                                        );
 
-                                        spriteBatch.Draw(
-                                        ach6, // spritesheet
-                                        ach1Pos, // where to draw in window
-                                        new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                                        Color.White, // dont change image color
-                                        0, // don't rotate the image
-                                        Vector2.Zero, // rotation center (not used)
-                                        2.25f, // scaling factor - dont change image size
-                                        SpriteEffects.None, // no effects
-                                        0  // default layer
-                                        );
-
-                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
 
-                if (achieves[6] == 1)//perfect game
-                {
-                    //draw trophy
-                    achieves[6] = 1;
-                    Variables.achieves[6] = 1;
-                    //draw trophy
-                    ach1Pos.X = ach1Pos.X + 100;
-                    //draw the trophy
-                    //draw the trophy & shadow
-                    spriteBatch.Draw(
-                    shadowSprite, // spritesheet
-                    ach1Pos, // where to draw in window
-                    new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                    Color.White, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
+            if (achieves[6] == 1)//perfect game
+            {
+                //draw trophy
+                achieves[6] = 1;
+                Variables.achieves[6] = 1;
+                //draw trophy
+                ach1Pos.X = ach1Pos.X + 100;
+                //draw the trophy
+                //draw the trophy & shadow
+                spriteBatch.Draw(
+                shadowSprite, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
 
 
-                    spriteBatch.Draw(
-                    ach7, // spritesheet
-                    ach1Pos, // where to draw in window
-                    new Rectangle(0, 0, 40, 60), // pick out a section of spritesheet
-                    Color.White, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
-                }
-                if (achieves[7] == 1 || Variables.thrownKunai >= 2000)//lots of kunai thrown
-                {
-                    achieves[7] = 1;
-                    Variables.achieves[7] = 1;
-                    //draw trophy
-                    ach1Pos.X = ach1Pos.X + 100;
-                    //draw the trophy
-                    //draw the trophy & shadow
-                    spriteBatch.Draw(
-                    shadowSprite, // spritesheet
-                    ach1Pos, // where to draw in window
-                    new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                    Color.White, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
+                spriteBatch.Draw(
+                ach7, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 60), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
+            }
+            if (achieves[7] == 1 || Variables.thrownKunai >= 2000)//lots of kunai thrown
+            {
+                achieves[7] = 1;
+                Variables.achieves[7] = 1;
+                //draw trophy
+                ach1Pos.X = ach1Pos.X + 100;
+                //draw the trophy
+                //draw the trophy & shadow
+                spriteBatch.Draw(
+                shadowSprite, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
 
-                    Vector2 kunaiPos = ach1Pos;
-                    kunaiPos.X = ach1Pos.X + 36;
-                    kunaiPos.Y = ach1Pos.Y + 40;
+                Vector2 kunaiPos = ach1Pos;
+                kunaiPos.X = ach1Pos.X + 36;
+                kunaiPos.Y = ach1Pos.Y + 40;
 
-                    spriteBatch.Draw(
-                    kunai, // spritesheet
-                    kunaiPos, // where to draw in window
-                    new Rectangle(0, 0, 8, 40), // pick out a section of spritesheet
-                    Color.Gold, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
-                }
-                if (achieves[8] == 1 || Variables.gamesQuit >= 1)//exit game once
-                {
-                    achieves[8] = 1;
-                    Variables.achieves[8] = 1;
-                    //draw trophy
-                    ach1Pos.X = ach1Pos.X + 100;
-                    //draw the trophy
-                    //draw the trophy & shadow
-                    spriteBatch.Draw(
-                    shadowSprite, // spritesheet
-                    ach1Pos, // where to draw in window
-                    new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                    Color.White, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
+                spriteBatch.Draw(
+                kunai, // spritesheet
+                kunaiPos, // where to draw in window
+                new Rectangle(0, 0, 8, 40), // pick out a section of spritesheet
+                Color.Gold, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
+            }
+            if (achieves[8] == 1 || Variables.gamesQuit >= 1)//exit game once
+            {
+                achieves[8] = 1;
+                Variables.achieves[8] = 1;
+                //draw trophy
+                ach1Pos.X = ach1Pos.X + 100;
+                //draw the trophy
+                //draw the trophy & shadow
+                spriteBatch.Draw(
+                shadowSprite, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
 
-                    spriteBatch.Draw(
-                    ach8, // spritesheet
-                    ach1Pos, // where to draw in window
-                    new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
-                    Color.White, // dont change image color
-                    0, // don't rotate the image
-                    Vector2.Zero, // rotation center (not used)
-                    2.25f, // scaling factor - dont change image size
-                    SpriteEffects.None, // no effects
-                    0  // default layer
-                    );
-                }
+                spriteBatch.Draw(
+                ach8, // spritesheet
+                ach1Pos, // where to draw in window
+                new Rectangle(0, 0, 40, 64), // pick out a section of spritesheet
+                Color.White, // dont change image color
+                0, // don't rotate the image
+                Vector2.Zero, // rotation center (not used)
+                2.25f, // scaling factor - dont change image size
+                SpriteEffects.None, // no effects
+                0  // default layer
+                );
             }
         }
 
