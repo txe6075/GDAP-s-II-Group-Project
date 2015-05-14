@@ -385,12 +385,15 @@ namespace Huntr
                 //Did p1 take any damage?
                 if(p1Health == 5)
                 {
-                    achieves = Variables.achieves;
-                    achieves[6] = 1;
-                    achieves[6] = 1;
-                    Console.WriteLine("PLAYER ONE GOT A PERFECT GAME");
-                    load.WriteAchievements(achieves);
-                    Console.WriteLine("SHOULD HAVE WRITTEN TO THE FILE");
+                    if (achieves != null)
+                    {
+                        achieves = Variables.achieves;
+                        achieves[6] = 1;
+                        achieves[6] = 1;
+                        Console.WriteLine("PLAYER ONE GOT A PERFECT GAME");
+                        load.WriteAchievements(achieves);
+                        Console.WriteLine("SHOULD HAVE WRITTEN TO THE FILE");
+                    }
                 }
             }
 
@@ -400,12 +403,15 @@ namespace Huntr
                 //Did p2 take any damage?
                 if(p2Health == 5)
                 {
-                    achieves = Variables.achieves;
-                    achieves[6] = 1;
-                    Variables.achieves[6] = 1;
-                    Console.WriteLine("PLAYER TWO GOT A PERFECT GAME");
-                    load.WriteAchievements(achieves);
-                    Console.WriteLine("SHOULD HAVE WRITTEN TO THE FILE");
+                    if (achieves != null)
+                    {
+                        achieves = Variables.achieves;
+                        achieves[6] = 1;
+                        Variables.achieves[6] = 1;
+                        Console.WriteLine("PLAYER TWO GOT A PERFECT GAME");
+                        load.WriteAchievements(achieves);
+                        Console.WriteLine("SHOULD HAVE WRITTEN TO THE FILE");
+                    }
                 }
             }
         }
