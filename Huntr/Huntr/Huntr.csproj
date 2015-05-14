@@ -82,6 +82,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\map.txt" />
+    <Content Include="Content\p1win.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\p2win.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\speed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

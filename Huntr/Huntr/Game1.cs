@@ -44,6 +44,8 @@ namespace Huntr
         Texture2D kunai;
         Texture2D speed;
         Texture2D jump;
+        Texture2D p1win;
+        Texture2D p2win;
         SpriteFont font;
 
         //Unique classes
@@ -61,19 +63,6 @@ namespace Huntr
         gameState state;
         int option = 0;
 
-        //Achievement Screen attributes
-        Texture2D achieveScreenSprite;
-        Achievements achieve;
-        Texture2D ach1;
-        Texture2D ach2;
-        Texture2D ach3;
-        Texture2D ach4;
-        Texture2D ach5;
-        Texture2D ach6;
-        Texture2D ach7;
-        Texture2D ach8;
-        Texture2D ach9;
-        Texture2D shadowSprite;
 
         //Pause Screen Attributes
         Texture2D pauseSprite;
@@ -137,6 +126,8 @@ namespace Huntr
             p1 = new Player(new Vector2(120, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), playerSprite, kunai, 1); // instantiate the player 1 object
             p2 = new Player(new Vector2(GraphicsDevice.Viewport.Width - 150, GraphicsDevice.Viewport.Height - 250), new Point(30, 64), player2Sprite, kunai, 2); // instantiate the player 2 object
 
+            p1win = Content.Load<Texture2D>("p1win");
+            p2win = Content.Load<Texture2D>("p2win");
 
             //Menu object
             menuSprite = Content.Load<Texture2D>("Menu3");
@@ -145,19 +136,6 @@ namespace Huntr
             button3Sprite = Content.Load<Texture2D>("Exit Game Button");
             menu = new Menu(menuSprite, new Vector2(0, 0), button1Sprite, new Vector2(600,400), button2Sprite, new Vector2(600, 500), button3Sprite, new Vector2(600, 600));
 
-            //Achievement Stuff
-            achieveScreenSprite = Content.Load<Texture2D>("Achievement Screen");
-            ach1 = Content.Load<Texture2D>("AchSprite1");
-            ach2 = Content.Load<Texture2D>("AchSprite2");
-            ach3 = Content.Load<Texture2D>("AchSprite3");
-            ach4 = Content.Load<Texture2D>("AchSprite4");
-            ach5 = Content.Load<Texture2D>("AchSprite5");
-            ach6 = Content.Load<Texture2D>("AchSprite6");
-            ach7 = Content.Load<Texture2D>("AchSprite7");
-            ach8 = Content.Load<Texture2D>("AchSprite8");
-            //     ach9 = Content.Load<Texture2D>("AchSprite9");
-            shadowSprite = Content.Load<Texture2D>("Shadow Sprite");
-            achieve = new Achievements(achieveScreenSprite, new Vector2(0, 0), kunai, shadowSprite, ach1, new Vector2(200, 400), ach2, ach3, ach4, ach5, ach6, ach7, ach8);
 
 
             //Pause 
@@ -188,7 +166,6 @@ namespace Huntr
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Variables.gamesQuit++;
-                achieve.CheckAchievements(gameTime, spriteBatch);
                 Exit();
             }
             // both player one and two can pause and unpause the game
@@ -254,8 +231,6 @@ namespace Huntr
 
                 case gameState.Exit:
                     Variables.gamesQuit++;
-                    achieve.CheckAchievements(gameTime, spriteBatch);
-                    achieve.WriteAchievements();
                     Exit();
                     break;
                 case gameState.Multiplayer:
@@ -288,7 +263,6 @@ namespace Huntr
                                         option = 0;
                                         Thread.Sleep(400);
                                         Variables.gamesQuit++;
-                                        achieve.WriteAchievements();
                                         break;
                                     case 2: state = gameState.Exit;
                                         break;
@@ -299,23 +273,20 @@ namespace Huntr
                         {
                             string winner = "";
 
-                            if (p1.KillCount >= 15) winner = "Player 1 is Ninja Supreme!";
-                            else if (p2.KillCount >= 15) winner = "Player 2 is Ninja Supreme!";
-
-                            spriteBatch.DrawString(font, winner, new Vector2(Variables.screenWidth / 2 - 300, Variables.screenHeight / 2 - 50), Color.Black, 0, Vector2.Zero, 3f, SpriteEffects.None, 0);
+                            if (p1.KillCount >= 1)
+                                spriteBatch.Draw(p1win, new Rectangle(Variables.screenWidth/2 - p1win.Width/2, Variables.screenHeight/2 - p1win.Height/2, 800, 300), Color.White);
+                            else if (p2.KillCount >= 15)
+                                spriteBatch.Draw(p2win, new Rectangle(Variables.screenWidth / 2 - p1win.Width / 2, Variables.screenHeight / 2 - p1win.Height / 2, 800, 300), Color.White);
 
                             spriteBatch.DrawString(font, "To exit, press X", new Vector2(Variables.screenWidth / 2 - 100, Variables.screenHeight / 2 + 50), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
                             //Add to the number of games played
                             Variables.gamesPlayed++;
-                            achieve.CheckPerfectGame(p1.KillCount, p2.KillCount, p1.Health, p2.Health);
 
-                            if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.X))
+                            if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Y) || GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.Y))
                             {
                                 Variables.gamesQuit++;
                                 
-                                achieve.CheckAchievements(gameTime, spriteBatch);
-                                achieve.WriteAchievements();
                                 Exit();
                             }
                         }
@@ -328,12 +299,10 @@ namespace Huntr
                     {
                         state = gameState.MainMenu;
                     }
-                    achieve.WriteAchievements();
+
                     spriteBatch.DrawString(font, "B: To Mainmenu", new Vector2(Variables.screenWidth / 2 - 100, Variables.screenHeight / 2 + 50), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     menu.CheckPress = false;
                     option = 0;
-                    achieve.Draw(gameTime, spriteBatch);
-                    achieve.CheckAchievements(gameTime, spriteBatch);
                     break;
             }
 
@@ -472,7 +441,7 @@ namespace Huntr
 
         public void WinCondition()
         {
-            if (p1.KillCount >= 15 || p2.KillCount >= 15)
+            if (p1.KillCount >= 1 || p2.KillCount >= 15)
             {
                 Variables.gameOver = true;
                 Variables.isPaused = true;
